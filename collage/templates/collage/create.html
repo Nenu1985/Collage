@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<form action="{% url 'collage:create' %}" method="POST">
+    {% csrf_token %}
+
+    <h2>Collage data</h2>
+    {{ collage_form.as_p }}
+
+    <hr />
+
+
+    <input type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}

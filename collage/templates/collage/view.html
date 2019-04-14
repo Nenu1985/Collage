@@ -1,0 +1,30 @@
+
+{#{% load static %}#}
+{#<link rel="stylesheet" type="text/css" href="{% static 'djtutorial/style.css' %}">#}
+
+{% block content %}
+
+
+    <a href="{% url 'collage:index'%}">Главная</a>
+    <br><hr>
+{#    <img src="{% static 'collage/images/out1.jpg'%}">#}
+
+    {{  collage }}<hr>
+  {% for photo in collage.photos.all %}
+      <img src="{{ photo.img_field.url }}">
+
+
+{#      {% for item1, item2 in url_photo %}#}
+{#          ----<li>{{ item1 }}  {{  item2 }}</li>#}
+{#      {% endfor %}#}
+
+  {% endfor %}
+    <br><hr>
+      <img src=" {{ collage.final_img.url }}">
+
+
+    <br><hr>
+    <a href="{% url 'collage:processing' collage.pk %}">Обрабока фоток</a><br>
+    <a href="{% url 'collage:index'%}">Главная</a>
+
+{% endblock %}

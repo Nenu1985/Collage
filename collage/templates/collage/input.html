@@ -1,0 +1,23 @@
+{% extends 'collage/base.html' %}
+
+{% block content %}
+
+
+    <form action="{% url 'collage:create' %}" method="post">
+        {% csrf_token %}
+        {{ collage_input.as_p }}
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <br>
+        <input type="submit" value="OK">
+{#    <button class="btn btn-primary" type="button" disabled>#}
+{#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
+{#  Loading...#}
+{#</button>#}
+
+    </form>
+
+
+
+{% endblock %}

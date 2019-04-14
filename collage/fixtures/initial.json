@@ -1,0 +1,23 @@
+[
+  {
+    "model": "collage.PhotoSize",
+    "pk": 1,
+    "fields": {
+      "size": 64
+    }
+  },
+  {
+    "model": "collage.PhotoSize",
+    "pk": 2,
+    "fields": {
+      "size": 128
+    }
+  },
+  {
+    "model": "collage.PhotoSize",
+    "pk": 3,
+    "fields": {
+      "size": 256
+    }
+  }
+]

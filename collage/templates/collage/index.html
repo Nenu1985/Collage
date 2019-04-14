@@ -1,0 +1,22 @@
+
+{#{% load static %}#}
+{#<link rel="stylesheet" type="text/css" href="{% static 'djtutorial/style.css' %}">#}
+
+{% block content %}
+
+
+    <a href="{% url 'collage:index'%}">Главная</a>
+    <br><hr>
+{#    <img src="{% static 'collage/images/out1.jpg'%}">#}
+    <ul>
+        <a href="{% url 'collage:input' %}"> Create new collage</a>
+
+  {% for collage in collages %}
+      <li><a href="{% url 'collage:view' collage.id %}">{{ collage }}</a></li>
+  {% endfor %}
+  </ul>
+
+    <br><hr>
+    <a href="{% url 'collage:index'%}">Главная</a>
+
+{% endblock %}

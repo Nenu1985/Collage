@@ -1,16 +1,24 @@
 {% extends 'collage/base.html' %}
-
+<script>
+    document.addEventListener("onload", onLoaded)
+    document.onload = function (){
+        alert("Loaded!")
+        document.getElementsByClassName("spinner-border").style.WebkitAnimationPlayState = "paused";
+    }
+</script>
 {% block content %}
 
 
     <form action="{% url 'collage:create' %}" method="post">
         {% csrf_token %}
         {{ collage_input.as_p }}
+
         <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
         </div>
+
         <br>
-        <input type="submit" value="OK">
+        <input id="submit" type="submit" value="OK" >
 {#    <button class="btn btn-primary" type="button" disabled>#}
 {#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
 {#  Loading...#}
@@ -18,6 +26,15 @@
 
     </form>
 
+<script>
+document.getElementsByClassName("spinner-border")[0].style.WebkitAnimationPlayState = "paused";
 
+document.getElementById("submit").addEventListener("click", btn_click)
+
+function btn_click() {
+    alert("Clicked!")
+  document.getElementsByClassName("spinner-border").style.WebkitAnimationPlayState = "running";
+}
+</script>
 
 {% endblock %}

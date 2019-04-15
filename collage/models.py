@@ -45,7 +45,7 @@ class Collage(models.Model):
     #photo_size = models.IntegerField()
     photos = models.ManyToManyField(Photo, blank=True)
 
-    final_img = models.ImageField(upload_to='collages', unique=True)
+    final_img = models.ImageField(upload_to='collages', unique=True, blank=True)
 
     def __str__(self):
         return 'Collage N = {}; ' \
@@ -211,7 +211,7 @@ class Collage(models.Model):
 
         imgs = []
         for photo in photos:
-            cut_photo = photo.cutphoto_set.first()
+            cut_photo = photo.cutphoto
             img = cv2.imread(cut_photo.img_field.path)
             imgs.append(img)
 

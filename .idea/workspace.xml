@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="11fe5d97-5f62-4e78-8027-c8f4f088dc4b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="11fe5d97-5f62-4e78-8027-c8f4f088dc4b" name="Default" comment="launcjh">
+      <change beforePath="$PROJECT_DIR$/.idea/Collag.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Collag.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a94410ae-e0ff-4f60-8a28-9bfd33a02800.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a94410ae-e0ff-4f60-8a28-9bfd33a02800.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/Activate.ps1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/deactivate.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/python.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/pythonw.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +48,12 @@
         <item name="db.sqlite3" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db.sqlite3" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
     </expand>
     <select />
   </component>
@@ -48,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/collage/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3417">
-              <caret line="215" selection-start-line="215" selection-end-line="215" />
+            <state relative-caret-position="332">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -58,37 +75,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/templates/collage/create.html">
-          <provider selected="true" editor-type-id="text-editor">
+        <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
-              <caret selection-end-column="25" />
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/templates/collage/input.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="18" />
+        <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_cutphoto">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_photo">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage_photos">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/collage/static/collage/679.js">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="102">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/templates/collage/base.html">
+        <entry file="file://$PROJECT_DIR$/collage/static/collage/679.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+            <state relative-caret-position="391">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -159,12 +194,13 @@
         <option value="$PROJECT_DIR$/collage/collage_create.py" />
         <option value="$PROJECT_DIR$/collage/views.py" />
         <option value="$PROJECT_DIR$/collage/templates/collage/view.html" />
-        <option value="$PROJECT_DIR$/collage/models.py" />
         <option value="$PROJECT_DIR$/static/styles.css" />
         <option value="$PROJECT_DIR$/static/base.html" />
         <option value="$PROJECT_DIR$/collage/templates/collage/create.html" />
         <option value="$PROJECT_DIR$/collage/templates/collage/base.html" />
         <option value="$PROJECT_DIR$/collage/templates/collage/input.html" />
+        <option value="$PROJECT_DIR$/collage/models.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
       </list>
     </option>
   </component>
@@ -185,6 +221,16 @@
             <path>
               <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
               <item name="Collage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="Collag" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="collage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -234,8 +280,8 @@
         <env name="DJANGO_SETTINGS_MODULE" value="Collag.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -260,8 +306,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555085088885</updated>
-      <workItem from="1555307353368" duration="343000" />
+      <workItem from="1555307353368" duration="442000" />
+      <workItem from="1555307816247" duration="628000" />
+      <workItem from="1555308456037" duration="1510000" />
     </task>
+    <task id="LOCAL-00001" summary="clone project to job station. add requirements file">
+      <created>1555307739753</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1555307739753</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -270,15 +326,15 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="343000" />
+    <option name="totallyTimeSpent" value="2580000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1688" height="1014" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14285715" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14652015" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Pylint" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32909605" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32909605" />
@@ -288,12 +344,13 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4993895" visible="true" weight="0.328125" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50061053" side_tool="true" visible="true" weight="0.328125" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4981685" visible="true" weight="0.328125" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50183153" side_tool="true" visible="true" weight="0.328125" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32909605" />
       <window_info anchor="bottom" id="manage.py@Collag" order="13" weight="0.30508474" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.32909605" />
+      <window_info anchor="bottom" id="Pylint" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -303,6 +360,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="clone project to job station. add requirements file" />
+    <option name="LAST_COMMIT_MESSAGE" value="clone project to job station. add requirements file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -463,48 +524,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage_photos">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Python37/Lib/site-packages/django/core/handlers/base.py" />
     <entry file="file://C:/Program Files/Python37/Lib/site-packages/django/db/models/manager.py" />
     <entry file="file://C:/Program Files/Python37/Lib/site-packages/django/db/models/fields/files.py" />
-    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_photo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_cutphoto">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/styles.css" />
-    <entry file="file://$PROJECT_DIR$/collage/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3417">
-          <caret line="215" selection-start-line="215" selection-end-line="215" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collage/templates/collage/create.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -555,8 +578,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/collage/static/collage/679.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="391">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_cutphoto">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_photo">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://a94410ae-e0ff-4f60-8a28-9bfd33a02800/schema/main/table/collage_collage_photos">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>

@@ -29,7 +29,8 @@ class Photo(models.Model):
 
 
 class CutPhoto(models.Model):
-    photo_src = models.ForeignKey(Photo, on_delete=models.CASCADE, unique=True)
+    #photo_src = models.ForeignKey(Photo, on_delete=models.CASCADE, unique=True)
+    photo_src = models.OneToOneField(Photo, on_delete=models.CASCADE)
     img_field = models.ImageField(upload_to='cut_collage_photos', unique=True)
     date = models.DateTimeField(auto_now_add=True)
 

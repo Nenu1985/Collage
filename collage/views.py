@@ -60,25 +60,10 @@ def collage_create(request):
 
     elif request.method == 'POST':
         collage_input_form = CollageInputForm(request.POST)
-
-        photo_num = int(collage_input_form['photo_num'].value())
-        photo_cols = int(collage_input_form['photo_cols'].value())
-        photo_size = int(collage_input_form['photo_size'].value())
-
-        collage = Collage(
-            photo_number=photo_num,
-            cols_number=photo_cols,
-            photo_size=PhotoSize.objects.get(size=photo_size),
-            create_date=timezone.now()
-        )
-
-        # exists = Collage.objects.filter(photo_number=photo_num)\
-        #     .filter(cols_number=photo_cols).first()\
-        #     .filter(photo_size=PhotoSize.objects.get(size=photo_size))\
-        #     .first()
+        if collage_input_form.is_valid():
+            collage = collage_input_form.save(commit=False)
 
         collage.save()
-
         photo_urls = collage.get_photos_urls()
 
         # download, store and return photos

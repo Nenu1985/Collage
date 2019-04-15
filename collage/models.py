@@ -13,6 +13,7 @@ from os.path import basename
 import cv2
 import os
 import numpy as np
+import uuid
 
 class PhotoSize(models.Model):
     size = models.IntegerField(default=128)
@@ -38,14 +39,15 @@ class CutPhoto(models.Model):
 # Create your models here.
 class Collage(models.Model):
 
-    photo_number = models.IntegerField()
-    cols_number = models.IntegerField()
+    photo_number = models.IntegerField(default=10)
+    cols_number = models.IntegerField(default=5)
     create_date = models.DateTimeField(auto_now_add=True)
+    photo_tag = models.CharField(max_length=30, default='women')
     photo_size = models.ForeignKey(PhotoSize, on_delete=models.CASCADE, blank=True)
     #photo_size = models.IntegerField()
     photos = models.ManyToManyField(Photo, blank=True)
 
-    final_img = models.ImageField(upload_to='collages', unique=True, blank=True)
+    final_img = models.ImageField(upload_to='collages', blank=True)
 
     def __str__(self):
         return 'Collage N = {}; ' \
@@ -66,14 +68,20 @@ class Collage(models.Model):
         )
         flickr.cache = cache
 
-        photos = flickr.walk(text='girl',
-                             per_page=20,  # may be you can try different numbers..
-                             extras='url_s'
+        extras = "url_s"        # 75 pixels per side and above
+        if self.photo_size == 128:
+            extras = "url_q"    # 150 pixels per side and above
+        else:
+            extras = "url_n"    # 320 pixels per side and above
+
+        photos = flickr.walk(text=self.photo_tag,
+                             per_page=int(self.photo_number*1.2),  # may be you can try different numbers..
+                             extras=extras
                              )
         urls = []
         num_of_photos = self.photo_number - 1
         for i, photo in enumerate(photos):
-            url = photo.get('url_s', 'no url')
+            url = photo.get(extras, 'no url')
             if url != 'no url':  # if url is empty - pass it and increment photo number
                 urls.append(url)
             else:
@@ -185,7 +193,7 @@ class Collage(models.Model):
         cv2.imwrite(file_path, image)
 
         with open(file_path, 'rb') as photo_file:
-            f_name = os.path.basename(photo_file.name)
+            f_name = uuid.uuid4().hex[:6]
             f_django = File(photo_file)
             img_field.save(
                 f_name,

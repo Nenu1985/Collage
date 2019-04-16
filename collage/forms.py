@@ -3,7 +3,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from collage.models import PhotoSize, Collage
+from collage.models import Collage
 
 
 # class PhotoForm(forms.ModelForm):
@@ -26,6 +26,7 @@ class CollageInputForm(forms.ModelForm):
             'final_img',
             'photos',
             'create_date',
+            'user',
         ]
     def save(self, commit=True):
 

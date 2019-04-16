@@ -3,7 +3,13 @@ from django.http import HttpResponse
 from .models import Collage, PhotoSize
 from .forms import CollageInputForm
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
+import threading
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.views.decorators.csrf import csrf_protect
+from .processor import Processor
 
 # Create your views here.
 def index(request):
@@ -49,7 +55,7 @@ def collage_input(request):
         }
         return render(request, 'collage/input.html', context)
 
-
+@login_required
 def collage_create(request):
     if request.method == 'GET':
         c = {
@@ -63,6 +69,7 @@ def collage_create(request):
         if collage_input_form.is_valid():
             collage = collage_input_form.save(commit=False)
 
+        collage.user = request.user
         collage.save()
         photo_urls = collage.get_photos_urls()
 
@@ -104,3 +111,28 @@ def collage_save(request):
     if request.method == 'POST':
         return HttpResponse('Hello')
     return HttpResponse(status=405)
+
+
+@csrf_protect
+def request_handler(request):
+
+    if request.is_ajax() and request.method == 'POST':
+        if "count" in request.POST and request.POST["count"]:
+            count = int(request.POST["count"])
+        else:
+            count = 1
+
+
+        processor = Processor()
+
+        thread = threading.Thread(target=processor.process, args=(count,))
+        thread.start()
+
+        return render(request,
+                      "collage/input.html"
+                      )
+
+    else:
+        return render(request,
+                      "collage/input.html"
+                      )

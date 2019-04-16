@@ -13,5 +13,6 @@ urlpatterns = [
     path('input/', views.collage_input, name='input'),
     path('save/', views.collage_save, name='save'),
     path('view/<int:collage_id>/', views.collage_view, name='view'),
-    path('view/<int:collage_id>/processing/', views.collage_view_processing, name='processing')
+    path('view/<int:collage_id>/processing/', views.collage_view_processing, name='processing'),
+    path('view/async', views.request_handler, name='async'),
 ]

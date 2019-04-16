@@ -54,7 +54,14 @@
     {% endblock %}
     </div>
     <div class="col-sm">
-      About collage app
+        {% if user.is_authenticated %}
+            <p>Привет {{ user.username }}! </p>
+            <p><a href="{% url 'auth_app:logout' %}">Выйти.</a></p>
+        {% else %}
+            <p>Добро пожаловать, гость! <a href="{% url 'auth_app:login' %}"></a></p>
+            <p>Войти</p>
+            <p><a href="{% url 'auth_app:register' %}">Зарегистрироваться.</a></p>
+        {% endif %}
     </div>
 
   </div>

@@ -14,6 +14,7 @@ import cv2
 import os
 import numpy as np
 import uuid
+from auth_app.models import CustomUser
 
 class PhotoSize(models.Model):
     size = models.IntegerField(default=128)
@@ -48,6 +49,7 @@ class Collage(models.Model):
     photos = models.ManyToManyField(Photo, blank=True)
 
     final_img = models.ImageField(upload_to='collages', blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return 'Collage N = {}; ' \

@@ -62,6 +62,16 @@ class Collage(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=3) <= self.create_date <= now
 
+    def launch_processing(self):
+        photo_urls = self.get_photos_urls()
+
+        # download, store and return photos
+        for i, url in enumerate(photo_urls):
+            new_photo = self.download_photos_by_url(url)
+            new_photo.save()
+            self.photos.add(new_photo)
+
+
     def get_photos_urls(self):
         flickr = flickrapi.FlickrAPI(
             settings.GLOBAL_SETTINGS['FLICKR_PUBLIC'],

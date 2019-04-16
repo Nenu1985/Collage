@@ -4,56 +4,62 @@
 
 {% block content %}
     {% load static %}
-   <script type="text/javascript" src="{% static 'collage/jquery-3.4.0.js' %}"></script>
-   <script>
-     function doIt() {
-       $.ajax({
-         type: "POST",
-         url: "{% url 'collage:async' %}",
-         data: {
-           csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-           count: $("#input_count").val()
-         },
-         success: function(data) {
-           alert("Процесс запущен! {{user.username}}");
-         },
-         error: function(xhr, textStatus, errorThrown) {
-           alert("Error: "+errorThrown+xhr.status+xhr.responseText);
-         }
-       });
-     }
-   </script>
+    <script type="text/javascript" src="{% static  'collage/jquery-3.4.0.js' %}"></script>
+    <script>
+        function doIt() {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'collage:async' %}",
+                data: {
+                    csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                    count: $("#input_count").val()
+                },
+                success: function (data) {
+                    alert("Процесс запущен! {{user.username}}");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert("Error: " + errorThrown + xhr.status + xhr.responseText);
+                }
+            });
+        }
+    </script>
 
     {% csrf_token %}
-   <input id="input_count" type="number" value="1" min="1" max="10000"></p>
-   <input id="button_do_it" type="button" value="Отправить" onclick="doIt()">
+    <input id="input_count" type="number" value="1" min="1" max="10000"></p>
+    <input id="button_do_it" type="button" value="Отправить" onclick="doIt()">
 
     <form action="{% url 'collage:create' %}" method="post">
         {% csrf_token %}
         {{ collage_input.as_p }}
 
-        <div class="spinner-border" role="status">
+        <div class="spinner-border" role="status" id="spinner">
             <span class="sr-only">Loading...</span>
         </div>
 
         <br>
-        <input id="submit" type="submit" value="OK" >
-{#    <button class="btn btn-primary" type="button" disabled>#}
-{#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
-{#  Loading...#}
-{#</button>#}
+        <input id="submit" type="submit" value="OK">
+        {#    <button class="btn btn-primary" type="button" disabled>#}
+        {#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
+        {#  Loading...#}
+        {#</button>#}
 
     </form>
 
-<script>
-document.getElementsByClassName("spinner-border")[0].style.WebkitAnimationPlayState = "paused";
+    <script>
+        {#document.getElementsByClassName("spinner-border")[0].style.WebkitAnimationPlayState = "paused";#}
+        $(document).ready(function()  {
+            $("#spinner").css("-webkit-animation-play-state", "paused");
+        })
 
-document.getElementById("submit").addEventListener("click", btn_click)
+        $('#submit').click(function () {
+            alert('clicked')
+            $("#spinner").css("-webkit-animation-play-state", "running");
+        })
 
-function btn_click() {
-
-  document.getElementsByClassName("spinner-border").style.WebkitAnimationPlayState = "running";
-}
-</script>
+        function btn_click() {
+            alert('Clicked')
+            document.getElementsByClassName("spinner-border").style.WebkitAnimationPlayState = "running";
+        }
+    </script>
 
 {% endblock %}

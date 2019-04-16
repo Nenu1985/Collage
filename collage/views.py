@@ -71,13 +71,19 @@ def collage_create(request):
 
         collage.user = request.user
         collage.save()
-        photo_urls = collage.get_photos_urls()
 
-        # download, store and return photos
-        for i, url in enumerate(photo_urls):
-            new_photo = collage.download_photos_by_url(url)
-            new_photo.save()
-            collage.photos.add(new_photo)
+
+
+        thread = threading.Thread(target=collage.launch_processing())
+        thread.start()
+
+        # photo_urls = collage.get_photos_urls()
+        #
+        # # download, store and return photos
+        # for i, url in enumerate(photo_urls):
+        #     new_photo = collage.download_photos_by_url(url)
+        #     new_photo.save()
+        #     collage.photos.add(new_photo)
 
         #collage.save()
         #collage.photos = photos
@@ -85,8 +91,8 @@ def collage_create(request):
         #collage_form = CollageCreateForm()
 
         return redirect(reverse(
-            'collage:view',
-            kwargs={'collage_id': collage.pk}
+            'collage:input',
+            #kwargs={'collage_id': collage.pk}
             )
         )
         # if collage_input_form.is_valid():

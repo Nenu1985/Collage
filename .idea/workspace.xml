@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="11fe5d97-5f62-4e78-8027-c8f4f088dc4b" name="Default" comment="Added celery.py, changed proj settings to use celery via redis broker. collage app has the simpliest task for testing celery">
-      <change afterPath="$PROJECT_DIR$/celery" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/templates/publish/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/templates/publish/post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="11fe5d97-5f62-4e78-8027-c8f4f088dc4b" name="Default" comment="add new app - publish. It sends emails. In future - asynchronoisly via celery: https://code.tutsplus.com/ru/tutorials/using-celery-with-django-for-background-task-processing--cms-28732">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Collag/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Collag/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Collag/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Collag/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collage/templates/collage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/collage/templates/collage/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publish/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/publish/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/publish/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+            <state relative-caret-position="178">
+              <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -158,11 +140,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Collag/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="205" column="36" lean-forward="true" selection-start-line="205" selection-start-column="36" selection-end-line="205" selection-end-column="36" />
+            <state relative-caret-position="352">
+              <caret line="200" column="29" lean-forward="true" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -230,8 +212,8 @@
         <option value="$PROJECT_DIR$/collage/templates/collage/index.html" />
         <option value="$PROJECT_DIR$/publish/urls.py" />
         <option value="$PROJECT_DIR$/publish/templates/publish/home.html" />
-        <option value="$PROJECT_DIR$/publish/views.py" />
         <option value="$PROJECT_DIR$/Collag/settings.py" />
+        <option value="$PROJECT_DIR$/publish/views.py" />
       </list>
     </option>
   </component>
@@ -421,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1555493238291</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add new app - publish. It sends emails. In future - asynchronoisly via celery: https://code.tutsplus.com/ru/tutorials/using-celery-with-django-for-background-task-processing--cms-28732">
+      <created>1555506411219</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1555506411219</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -430,7 +419,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49905000" />
+    <option name="totallyTimeSpent" value="50592000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -445,7 +434,7 @@
     <frame x="-4" y="-4" width="1688" height="1014" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6591837" visible="true" weight="0.15750916" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6591837" visible="true" weight="0.15750916" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.3415133" side_tool="true" weight="0.15570469" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -457,8 +446,8 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4979592" weight="0.32890856" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.46825397" visible="true" weight="0.328125" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.53174603" side_tool="true" visible="true" weight="0.328125" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.74542123" visible="true" weight="0.328125" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25457877" side_tool="true" visible="true" weight="0.328125" />
       <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.7032967" weight="0.32589287" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.4957265" weight="0.32700893" />
       <window_info anchor="bottom" id="manage.py@Collag" order="13" weight="0.30508474" />
@@ -480,7 +469,8 @@
     <MESSAGE value="Clear DB, media folder. Only PhotoSize model exists." />
     <MESSAGE value="changed input form to modelForm with saving procedure. Remove unique attribute at final image field of collage model. Added photo_tag field at collage model and changing downloaded photos size in demand of selected photos size" />
     <MESSAGE value="Added celery.py, changed proj settings to use celery via redis broker. collage app has the simpliest task for testing celery" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added celery.py, changed proj settings to use celery via redis broker. collage app has the simpliest task for testing celery" />
+    <MESSAGE value="add new app - publish. It sends emails. In future - asynchronoisly via celery: https://code.tutsplus.com/ru/tutorials/using-celery-with-django-for-background-task-processing--cms-28732" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new app - publish. It sends emails. In future - asynchronoisly via celery: https://code.tutsplus.com/ru/tutorials/using-celery-with-django-for-background-task-processing--cms-28732" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -880,20 +870,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/publish/views.py">
+    <entry file="file://$PROJECT_DIR$/Collag/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="352">
+          <caret line="200" column="29" lean-forward="true" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Collag/settings.py">
+    <entry file="file://$PROJECT_DIR$/publish/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="205" column="36" lean-forward="true" selection-start-line="205" selection-start-column="36" selection-end-line="205" selection-end-column="36" />
+        <state relative-caret-position="178">
+          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -38,7 +38,7 @@ def send_email(request):
     subject = 'Thank you for registering to our site'
     message = ' it  means a world to us '
     email_from = 'nenuzhny@mail.ru'
-    recipient_list = ['nenuzhny112018@gmail.com', ]
+    recipient_list = ['nenuzhny85@gmail.com', ]
     to_template = ''
     try:
         to_template = str(send_mail(

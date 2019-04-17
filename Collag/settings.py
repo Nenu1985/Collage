@@ -149,3 +149,47 @@ GLOBAL_SETTINGS = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# Celery settings
+
+CELERY_BROKER_URL = 'redis://localhost'
+#
+# #: Only add pickle to this list if your broker is secured
+# #: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+CELERY_TASK_SERIALIZER = 'json'
+
+#
+#
+#
+# # Redis settings:
+#
+REDIS_BACKEND = {
+    'HOST': 'localhost',
+    'PORT': 6379,
+    'DB': 0,
+}
+#
+REDIS_BACKEND_URL = 'redis://{host}:{port}/{db}'.format(
+    host=REDIS_BACKEND['HOST'],
+    port=REDIS_BACKEND['PORT'],
+    db=REDIS_BACKEND['DB'],
+)
+#
+#
+# # CELERY SETTINGS
+#
+# # If you want to use Redis for storing results (probably not):
+# # CELERY_RESULT_BACKEND = 'redis://{host}:{port}/{db}'.format(
+# #     host=REDIS_BACKEND['HOST'],
+# #     port=REDIS_BACKEND['PORT'],
+# #     db=REDIS_BACKEND['DB'],
+# # )
+#
+#
+# BROKER_URL = REDIS_BACKEND_URL
+#
+# # Periodic tasks:
+# CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"

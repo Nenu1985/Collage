@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'collage',
     'auth_app',
+    'publish',
 ]
 
 MIDDLEWARE = [
@@ -193,3 +194,13 @@ REDIS_BACKEND_URL = 'redis://{host}:{port}/{db}'.format(
 #
 # # Periodic tasks:
 # CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+
+# Email settings
+# https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465  # 465 - SSL; 587 - TSL
+EMAIL_HOST_USER = 'nenuzhny85@gmail.com'
+EMAIL_HOST_PASSWORD = 'nenu32590632'

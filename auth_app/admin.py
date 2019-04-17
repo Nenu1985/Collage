@@ -15,35 +15,45 @@ from auth_app.models import CustomUser
 #
 #
 # class CustomAdminModel(UserAdmin):
+#     # fieldsets = UserAdmin.fieldsets + (
+#     #     ('Pizza', {'fields': (
+#     #        # 'favourite_pizza',
+#     #         'our_note',
+#     #     )},
+#     # )
 #     fieldsets = UserAdmin.fieldsets + (
-#         ('Pizza', {'fields': (
-#             'favourite_pizza',
+#         ('SomeSet', {'fields': (
+#            # 'favourite_pizza',
 #             'our_note',
-#         )}),
-#     )
+#         )},
+#     ))
+#
 #     list_display = (
 #         'username',
 #         'first_name',
 #         'last_name',
-#         'favourite_pizza',
+#         #'favourite_pizza',
 #         'our_note',
 #     )
 #     list_editable = (
-#         'favourite_pizza',
+#         #'favourite_pizza',
 #         'our_note',
 #     )
-#     list_filter = (
-#         'favourite_pizza__name',
-#     )
-#     list_select_related = ('favourite_pizza', )
+#     # list_filter = (
+#     #     'favourite_pizza__name',
+#     # )
+#     # list_select_related = ('favourite_pizza', )
 #     search_fields = (
 #         'first_name',
 #         'last_name',
-#         'favourite_pizza__name',
+#     #    'favourite_pizza__name',
 #         'our_note',
 #     )
 #     actions = (
 #         make_black_listed,
 #     )
 #
-# admin.site.register(CustomUser, CustomAdminModel)
+#admin.site.register(CustomUser, CustomAdminModel)
+@admin.register(CustomUser)
+class UserAdmin(admin.ModelAdmin):
+    pass

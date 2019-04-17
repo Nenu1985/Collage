@@ -26,6 +26,7 @@ urlpatterns = [
     path('collage/', include('collage.urls')),
     path('', index),
     path('auth/', include('auth_app.urls')),
+    path('publish/', include('publish.urls'))
 ]
 
 

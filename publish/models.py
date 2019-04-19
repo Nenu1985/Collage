@@ -9,6 +9,7 @@ class Post(models.Model):
     created = models.DateTimeField('Created Date', default=timezone.now)
     title = models.CharField('Title', max_length=200)
     content = models.TextField('Content')
+    #  A slug is a short label for something, containing only letters, numbers, underscores
     slug = models.SlugField('Slug')
 
     def __str__(self):

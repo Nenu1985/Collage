@@ -52,26 +52,37 @@ class Collage(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return 'Collage N = {}; ' \
-               'Size = {}; ' \
-               'Cols num = {}; ' \
-               'Size = {}'\
-                .format(self.photo_number, self.photo_size, self.cols_number, self.photo_size.size)
+        return 'Collage N = {0}; ' \
+               'Size = {1}; ' \
+               'Cols num = {2}; ' \
+               'Size = {3}---'\
+               'Date = {4}'\
+                .format(self.photo_number,
+                        self.photo_size,
+                        self.cols_number,
+                        self.photo_size.size,
+                        self.create_date.strftime("%d %b %Y %H:%M:%S"),
+                        )
 
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=3) <= self.create_date <= now
 
-    def launch_processing(self):
-        photo_urls = self.get_photos_urls()
+    # наводим красоту для метода при отображении списка вопросов в админке
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.boolean = True
+    was_published_recently.short_description = 'Published recently?'
 
-        # download, store and return photos
-        for i, url in enumerate(photo_urls):
-            new_photo = self.download_photos_by_url(url)
-            new_photo.save()
-            self.photos.add(new_photo)
-
-
+    # def launch_processing(self):
+    #     photo_urls = self.get_photos_urls()
+    #
+    #     # download, store and return photos
+    #     for i, url in enumerate(photo_urls):
+    #         new_photo = self.download_photos_by_url(url)
+    #         new_photo.save()
+    #         self.photos.add(new_photo)
+    #
+    #
     def get_photos_urls(self):
         flickr = flickrapi.FlickrAPI(
             settings.GLOBAL_SETTINGS['FLICKR_PUBLIC'],
@@ -101,7 +112,7 @@ class Collage(models.Model):
             if i >= num_of_photos:
                 break
         return urls
-
+    #
     def download_photos_by_url(self, photo_url):
         """
         Download a photo by url, save it to DB in photo model, return Photo instance
@@ -128,7 +139,7 @@ class Collage(models.Model):
             photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
 
         return photo
-
+    #
     def get_cv2_images(self):
         photos_to_cut = self.photos.all();
 
@@ -245,10 +256,6 @@ class Collage(models.Model):
 
 
 
-    # наводим красоту для метода при отображении списка вопросов в админке
-    was_published_recently.admin_order_field = 'pub_date'
-    was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'
 
 
 

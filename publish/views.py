@@ -25,7 +25,7 @@ def home(request):
 
 def verify(request, uuid):
     try:
-        user = CustomUser.objects.get(verification_uuid=uuid, is_verified=False)
+        user = CustomUser.objects.get(verification_uuids=uuid, is_verified=False)
     except CustomUser.DoesNotExist:
         raise Http404("User does not exist or is already verified")
 

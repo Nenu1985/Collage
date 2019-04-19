@@ -5,10 +5,13 @@ from celery import Celery
 ####
 # solved problem:
 # https://stackoverflow.com/questions/45744992/celery-raises-valueerror-not-enough-values-to-unpack
-# On Windows worker stars by: 'celery -A <module> worker -l info -P eventlet'
-# rather than 'celery -A proj worker -l info'
+# On Windows worker stars by:
+# ---> 'celery -A <module> worker -l info -P eventlet'
+# rather than
+# --->'celery -A proj worker -l info'
 # or (better)
-# add a string to this file: 'os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!'
+# add a string to this file: 'os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
+#
 ####
 
 # set the default Django settings module for the 'celery' program.

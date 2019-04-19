@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PhotoSize
+from .models import PhotoSize, Collage
 
 
 # Register your models here.
@@ -21,5 +21,12 @@ from .models import PhotoSize
     # list_display = ('photo_number', 'create_date', 'was_published_recently')
     # list_filter = ['create_date']
 
-
+#
+# @admin.register(Collage)
+# class CollageAdmin(admin.ModelAdmin):
+#     fields = [
+#         #'create_date',
+#
+#     ]
+admin.site.register(Collage)
 admin.site.register(PhotoSize)

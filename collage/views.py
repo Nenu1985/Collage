@@ -10,6 +10,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from .processor import Processor
+from .tasks import launch_processing, test_long_task, test_long_task2
+
 
 # Create your views here.
 def index(request):
@@ -51,9 +53,41 @@ def collage_input(request):
     if request.method == 'GET':
         context = {
             'collage_input': CollageInputForm(),
-
+            'some_text': 'get request',
         }
         return render(request, 'collage/input.html', context)
+    elif request.method == 'POST':
+        if request.is_ajax() and request.method == 'POST':
+            context = {
+                'some_text': 'hello'
+            }
+            return render(request, 'collage/input.html', context)
+
+        else:
+
+            # collage_input_form = CollageInputForm(request.POST)
+            # if collage_input_form.is_valid():
+            #     collage = collage_input_form.save(commit=False)
+            # else:
+            #     return HttpResponse(status=405)
+            #
+            # collage.user = request.user
+            # collage.save()
+
+
+            #launch_processing.delay(collage.pk)
+            test_long_task.delay()
+            test_long_task2.delay()
+
+            context = {
+                'some_text': 'Launched!'
+            }
+
+            #return render(request,'collage/input.html', context)
+            return redirect(reverse('collage:input'), context)
+
+
+    return HttpResponse(status=405)
 
 @login_required
 def collage_create(request):
@@ -65,51 +99,35 @@ def collage_create(request):
         return render(request, 'collage/create.html', c)
 
     elif request.method == 'POST':
-        collage_input_form = CollageInputForm(request.POST)
-        if collage_input_form.is_valid():
-            collage = collage_input_form.save(commit=False)
+        if request.is_ajax() and request.method == 'POST':
+            context = {
+                'some_text': 'hello'
+            }
+            return render(request, 'collage/create.html', context)
 
-        collage.user = request.user
-        collage.save()
+        else:
+
+            collage_input_form = CollageInputForm(request.POST)
+            if collage_input_form.is_valid():
+                collage = collage_input_form.save(commit=False)
+
+            collage.user = request.user
+            collage.save()
 
 
+            launch_processing.delay(collage.pk)
 
-        thread = threading.Thread(target=collage.launch_processing())
-        thread.start()
 
-        # photo_urls = collage.get_photos_urls()
-        #
-        # # download, store and return photos
-        # for i, url in enumerate(photo_urls):
-        #     new_photo = collage.download_photos_by_url(url)
-        #     new_photo.save()
-        #     collage.photos.add(new_photo)
+            context = {
+                'some_text': 'Launched!'
+            }
 
-        #collage.save()
-        #collage.photos = photos
-
-        #collage_form = CollageCreateForm()
-
-        return redirect(reverse(
-            'collage:input',
-            #kwargs={'collage_id': collage.pk}
+            return redirect(reverse(
+                'collage:input',
+                context,
+                )
             )
-        )
-        # if collage_input_form.is_valid():
-        #     with transaction.atomic():
-        #         delivery = delivery_from.save()
-        #         pizza = pizza_form.save(delivery=delivery)
-        #         pizza_form.save_m2m()
-        #
-        #     return redirect(reverse('pizza:view', kwargs={
-        #         'pizza_order_id': pizza.pk
-        #     }))
-        # else:
-        #     c = {
-        #         'pizza_form': pizza_form,
-        #         'delivery_form': delivery_from,
-        #     }
-        #     return render(request, 'pizza_app/create.html', c)
+
     return HttpResponse(status=405)
 
 
@@ -120,7 +138,7 @@ def collage_save(request):
 
 
 @csrf_protect
-def request_handler(request):
+def async_example(request):
 
     if request.is_ajax() and request.method == 'POST':
         if "count" in request.POST and request.POST["count"]:

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'collage',
     'auth_app',
     'publish',
+    'celery_pb',
 ]
 
 MIDDLEWARE = [
@@ -160,7 +161,9 @@ CELERY_BROKER_URL = 'redis://localhost'
 # #: from unwanted access (see userguide/security.html)
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_IGNORE_RESULT = False
 
 #
 #

@@ -10,11 +10,13 @@
         <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="results" uuid="5d34063e-e169-4c3a-9642-7747598e139f">
+    <data-source source="LOCAL" name="results [2]" uuid="0a2280b2-0b34-454b-835a-19b429acfc07">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>SQLite</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\opencv\git\Collage\results.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\py\Collage_git\results.sqlite</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>

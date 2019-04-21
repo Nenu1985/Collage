@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from .processor import Processor
-from .tasks import launch_processing, test_long_task, test_long_task2
+from .tasks import launch_processing, test_long_task, test_long_task2, my_task, my_task2, my_task3
 
 
 # Create your views here.
@@ -48,46 +48,60 @@ def get_photo(request, collage_id):
     #     }
     return HttpResponse('get_photo')
 
-
+@csrf_protect
 def collage_input(request):
     if request.method == 'GET':
+
         context = {
             'collage_input': CollageInputForm(),
             'some_text': 'get request',
+
+
         }
+
         return render(request, 'collage/input.html', context)
     elif request.method == 'POST':
         if request.is_ajax() and request.method == 'POST':
-            context = {
-                'some_text': 'hello'
-            }
-            return render(request, 'collage/input.html', context)
+            if "query_type" in request.POST and request.POST["query_type"]:
+                query_type = request.POST["query_type"]
+            else:
+                query_type = 'none'
 
+            if query_type == 'poll':
+                context = {
+                    'some_text': 'poll'
+                }
+                return HttpResponse('Ok')
+            elif query_type == 'collage_launch':
+                collage_input_form = CollageInputForm(request.POST)
+                if collage_input_form.is_valid():
+                    collage = collage_input_form.save(commit=False)
+                else:
+                    return HttpResponse(status=405)
+
+                collage.user = request.user
+                collage.save()
+
+                # launch_processing.delay(collage.pk)
+                test_long_task.delay()
+
+                context = {
+                    'some_text': 'Launched!'
+                }
+                return HttpResponse('Ok')
+            elif query_type == 'progress_launch':
+                result = my_task.delay(10)
+                response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})
+                return HttpResponse(response)
+            else:
+                return HttpResponse(status=405)
         else:
-
-            # collage_input_form = CollageInputForm(request.POST)
-            # if collage_input_form.is_valid():
-            #     collage = collage_input_form.save(commit=False)
-            # else:
-            #     return HttpResponse(status=405)
-            #
-            # collage.user = request.user
-            # collage.save()
+            return HttpResponse(status=405)
+    else:
+        return HttpResponse(status=405)
 
 
-            #launch_processing.delay(collage.pk)
-            test_long_task.delay()
-            test_long_task2.delay()
 
-            context = {
-                'some_text': 'Launched!'
-            }
-
-            #return render(request,'collage/input.html', context)
-            return redirect(reverse('collage:input'), context)
-
-
-    return HttpResponse(status=405)
 
 @login_required
 def collage_create(request):
@@ -98,37 +112,7 @@ def collage_create(request):
         }
         return render(request, 'collage/create.html', c)
 
-    elif request.method == 'POST':
-        if request.is_ajax() and request.method == 'POST':
-            context = {
-                'some_text': 'hello'
-            }
-            return render(request, 'collage/create.html', context)
 
-        else:
-
-            collage_input_form = CollageInputForm(request.POST)
-            if collage_input_form.is_valid():
-                collage = collage_input_form.save(commit=False)
-
-            collage.user = request.user
-            collage.save()
-
-
-            launch_processing.delay(collage.pk)
-
-
-            context = {
-                'some_text': 'Launched!'
-            }
-
-            return redirect(reverse(
-                'collage:input',
-                context,
-                )
-            )
-
-    return HttpResponse(status=405)
 
 
 def collage_save(request):
@@ -160,3 +144,14 @@ def async_example(request):
         return render(request,
                       "collage/input.html"
                       )
+
+
+def progress(request):
+    result = my_task.delay(10)
+    context = {
+        'collage_input': CollageInputForm(),
+        'some_text': 'get request',
+        'task_id': result.task_id,
+
+    }
+    return render(request, "collage/progress.html", context)

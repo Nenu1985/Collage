@@ -2,23 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11fe5d97-5f62-4e78-8027-c8f4f088dc4b" name="Default" comment="change host email">
-      <change afterPath="$PROJECT_DIR$/auth_app/tasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/backend.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/static/celery_pb/celery_progress.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celery_pb/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collage/templates/collage/progress.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Collag.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Collag.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Collag/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Collag/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collage/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collag/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Collag/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Collag/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Collag/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage/templates/collage/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/collage/templates/collage/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collage/templates/collage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/collage/templates/collage/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage/templates/collage/input.html" beforeDir="false" afterPath="$PROJECT_DIR$/collage/templates/collage/input.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/collage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/collage/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/publish/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/publish/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/publish/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/publish/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/results.sqlite" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,29 +57,7 @@
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db.sqlite3" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db.sqlite3" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="results" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="results" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="results" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="results [2]" type="feb32156:DbDataSourceImpl" />
       </path>
     </expand>
     <select />
@@ -80,95 +70,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/celery_pb/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="progress.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collage/templates/collage/progress.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="input.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/collage/templates/collage/input.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collage/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="result.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery/result.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="478" selection-start-line="478" selection-end-line="478" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="response.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/http/response.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="290" selection-start-line="290" selection-end-line="290" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="decorators.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/utils/decorators.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="158" selection-start-line="158" selection-end-line="158" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="backend.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/celery_pb/backend.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-309">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="celery.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Collag/celery.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Collag/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+            <state relative-caret-position="317">
+              <caret line="29" column="47" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="47" />
               <folding>
                 <element signature="e#630#662#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/publish/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="44" column="20" lean-forward="true" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="144" column="46" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/processor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/Program Files (x86)/Python37/Lib/pathlib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="519" column="33" lean-forward="true" selection-start-line="519" selection-start-column="33" selection-end-line="519" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/tasks.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-              <folding>
-                <element signature="e#25#81#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/collage/templates/collage/input.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-186">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collage/templates/collage/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="73" column="7" lean-forward="true" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Collag/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="180" column="1" lean-forward="true" selection-start-line="180" selection-start-column="1" selection-end-line="180" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -188,6 +187,9 @@
     <findStrings>
       <find>TIME</find>
       <find>if</find>
+      <find>initProgressBar</find>
+      <find>percent</find>
+      <find>task</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,32 +216,46 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/publish/admin.py" />
         <option value="$PROJECT_DIR$/publish/templates/publish/post.html" />
-        <option value="$PROJECT_DIR$/Collag/urls.py" />
         <option value="$PROJECT_DIR$/auth_app/admin.py" />
-        <option value="$PROJECT_DIR$/collage/templates/collage/index.html" />
         <option value="$PROJECT_DIR$/publish/urls.py" />
         <option value="$PROJECT_DIR$/publish/templates/publish/home.html" />
-        <option value="$PROJECT_DIR$/Collag/settings.py" />
         <option value="$PROJECT_DIR$/auth_app/task.py" />
         <option value="$PROJECT_DIR$/auth_app/models.py" />
         <option value="$PROJECT_DIR$/publish/views.py" />
         <option value="$PROJECT_DIR$/publish/models.py" />
-        <option value="$PROJECT_DIR$/Collag/celery.py" />
         <option value="$PROJECT_DIR$/auth_app/tasks.py" />
         <option value="$PROJECT_DIR$/collage/models.py" />
         <option value="$PROJECT_DIR$/collage/admin.py" />
-        <option value="$PROJECT_DIR$/collage/urls.py" />
         <option value="$PROJECT_DIR$/collage/processor.py" />
-        <option value="$PROJECT_DIR$/collage/tasks.py" />
         <option value="$PROJECT_DIR$/collage/templates/collage/base.html" />
+        <option value="$PROJECT_DIR$/collage/urls.py" />
+        <option value="$PROJECT_DIR$/collage/templates/collage/index.html" />
+        <option value="$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/backend.py" />
+        <option value="$PROJECT_DIR$/Collag/celery.py" />
+        <option value="$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/views.py" />
+        <option value="$PROJECT_DIR$/Collag/settings.py" />
+        <option value="$PROJECT_DIR$/collage/tasks.py" />
+        <option value="$PROJECT_DIR$/Collag/urls.py" />
+        <option value="$PROJECT_DIR$/celery_pb/urls.py" />
+        <option value="$PROJECT_DIR$/celery_pb/views.py" />
+        <option value="$PROJECT_DIR$/collage/templates/collage/progress.html" />
         <option value="$PROJECT_DIR$/collage/views.py" />
         <option value="$PROJECT_DIR$/collage/templates/collage/input.html" />
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="785" />
-    <option name="width" value="1299" />
+    <option name="width" value="1300" />
     <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -250,64 +266,41 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="Collage_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage_git" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
-              <item name="auth_app" type="462c0819:PsiDirectoryNode" />
+              <item name="Collage_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage_git" type="462c0819:PsiDirectoryNode" />
+              <item name="celery_pb" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
-              <item name="Collag" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="Collage_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage_git" type="462c0819:PsiDirectoryNode" />
               <item name="collage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="Collage_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage_git" type="462c0819:PsiDirectoryNode" />
               <item name="collage" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
+              <item name="Collage_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Collage_git" type="462c0819:PsiDirectoryNode" />
               <item name="collage" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="collage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
-              <item name="publish" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
-              <item name="publish" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Collage" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Collage" type="462c0819:PsiDirectoryNode" />
-              <item name="publish" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="publish" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,6 +322,9 @@
       <recent name="E:\py\Collag\collage\migrations" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\py\Collage_git\celery_pb" />
+      <recent name="E:\py\Collage_git\celery_pb\static\celery_pb" />
+      <recent name="E:\py\Collage_git\collage\templates\collage" />
       <recent name="E:\py\Collage\collage\static\collage" />
     </key>
   </component>
@@ -367,7 +363,6 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
-      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -459,37 +454,66 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1688" height="1014" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6591837" visible="true" weight="0.15934066" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969475" weight="0.328125" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.529304" side_tool="true" weight="0.40513393" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.495116" weight="0.32627118" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.7014652" weight="0.32485875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48107448" weight="0.34039548" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.72893775" weight="0.36723164" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6591837" visible="true" weight="0.17449665" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="4" weight="0.28926176" />
+      <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.3415133" side_tool="true" weight="0.15570469" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4993895" weight="0.328125" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48107448" weight="0.34151787" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47069597" weight="0.40513393" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.47069597" visible="true" weight="0.45056498" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969475" weight="0.328125" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.72893775" visible="true" weight="0.328125" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.529304" side_tool="true" weight="0.40513393" />
-      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.7014652" weight="0.32589287" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.495116" weight="0.32700893" />
       <window_info anchor="bottom" id="manage.py@Collag" order="13" sideWeight="0.497558" weight="0.3046875" />
-      <window_info anchor="bottom" id="Database Console" order="14" weight="0.32909605" />
-      <window_info anchor="bottom" id="Pylint" order="15" sideWeight="0.4993895" weight="0.32924107" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Pylint" order="15" sideWeight="0.4993895" weight="0.32924107" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.32909605" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4993895" weight="0.328125" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.32909605" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6591837" visible="true" weight="0.16577181" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48107448" weight="0.34039548" />
+      <window_info anchor="bottom" id="manage.py@Collag" order="13" sideWeight="0.497558" weight="0.3046875" />
+      <window_info anchor="bottom" id="Pylint" order="15" sideWeight="0.4993895" weight="0.32924107" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969475" weight="0.328125" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.7014652" weight="0.32485875" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4993895" weight="0.328125" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.47069597" weight="0.4039548" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.72893775" visible="true" weight="0.36723164" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.529304" side_tool="true" weight="0.40513393" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.495116" weight="0.32700893" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.2844933" />
-    </layout>
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="4" weight="0.28926176" />
+      <window_info id="Favorites" order="2" sideWeight="0.3415133" side_tool="true" weight="0.15570469" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="clone project to job station. add requirements file" />
@@ -525,299 +549,62 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/collage/views.py</url>
-          <line>60</line>
-          <option name="timeStamp" value="54" />
+          <url>file://$PROJECT_DIR$/collage/tasks.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/collage/views.py</url>
-          <line>53</line>
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/backend.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/backend.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/backend.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/views.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/views.py</url>
+          <line>13</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/collage/views.py</url>
-          <line>102</line>
-          <option name="timeStamp" value="69" />
+          <line>150</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/collage/views.py</url>
-          <line>86</line>
-          <option name="timeStamp" value="70" />
+          <line>94</line>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/collage/templates/collage/input.html</url>
-          <line>81</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="64" />
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/static/celery_progress/celery_progress.js</url>
+          <line>30</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
+      <option name="time" value="82" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/collage/flickr_image_download.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="134" column="60" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/static/collage/679.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/templates/collage/view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/views/generic/base.py" />
-    <entry file="file://$PROJECT_DIR$/auth_app/templatetags/auth_custom_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth_app/templates/auth_app/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
-          <folding>
-            <element signature="e#25#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/shortcuts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/static/collage/jquery-3.4.0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/amqp/transport.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collag/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth_app/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/contrib/auth/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="169" selection-start-line="169" selection-end-line="169" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/uuid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/urls/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publish/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publish/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/dispatch/dispatcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/core/mail/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth_app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth_app/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#24#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth_app/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/sqlite_sequence">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/sqlite_master">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collag/celery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publish/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publish/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="63" column="69" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/celery_tasksetmeta">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/celery/local.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="201" column="28" selection-start-line="201" selection-start-column="28" selection-end-line="201" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/celery/app/task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="396" selection-start-line="396" selection-end-line="396" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/celery_tasksetmeta" />
+    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/celery/local.py" />
+    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/celery/app/task.py" />
     <entry file="file://$PROJECT_DIR$/publish/templates/publish/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collag/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
-          <folding>
-            <element signature="e#630#662#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -828,13 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collage/templates/collage/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collage/templates/collage/create.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -842,30 +622,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Python37/Lib/pathlib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="519" column="33" lean-forward="true" selection-start-line="519" selection-start-column="33" selection-end-line="519" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/Program Files (x86)/Python37/Lib/site-packages/django/core/handlers/base.py" />
+    <entry file="file://C:/Program Files (x86)/Python37/Lib/pathlib.py" />
     <entry file="file://$PROJECT_DIR$/auth_app/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -876,26 +634,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/publish/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="44" column="20" lean-forward="true" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collag/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="180" column="1" lean-forward="true" selection-start-line="180" selection-start-column="1" selection-end-line="180" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collage/processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="20">
           <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="22" />
         </state>
       </provider>
@@ -910,34 +651,276 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collage/templates/collage/base.html">
+    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/celery_taskmeta" />
+    <entry file="file://$PROJECT_DIR$/publish/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="73" column="7" lean-forward="true" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collage/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="20">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
           <folding>
-            <element signature="e#25#81#0" expanded="true" />
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="das://5d34063e-e169-4c3a-9642-7747598e139f/schema/main/table/celery_taskmeta">
+    <entry file="file://$PROJECT_DIR$/collage/templates/collage/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collag/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="25" lean-forward="true" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python37/Lib/pathlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13760">
+          <caret line="700" column="28" selection-start-line="700" selection-start-column="28" selection-end-line="700" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/static/celery_progress/celery_progress.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery/local.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2740">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/urls/resolvers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="659" selection-start-line="659" selection-end-line="659" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/template/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18780">
+          <caret line="956" selection-start-line="956" selection-end-line="956" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/templates/django/forms/widgets/number.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/templates/django/forms/widgets/attrs.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/templates/django/forms/widgets/text.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/templates/django/forms/widgets/input.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://0a2280b2-0b34-454b-835a-19b429acfc07/schema/main/table/celery_tasksetmeta">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
     </entry>
+    <entry file="das://0a2280b2-0b34-454b-835a-19b429acfc07/schema/main/table/celery_taskmeta">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage/templates/collage/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/backend.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="28" column="103" selection-start-line="28" selection-start-column="103" selection-end-line="28" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/utils/deprecation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1840">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python37/Lib/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18180">
+          <caret line="916" selection-start-line="916" selection-end-line="916" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python37/Lib/socketserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14260">
+          <caret line="719" selection-start-line="719" selection-end-line="719" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" selection-start-line="3" selection-end-line="6" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery_progress/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" lean-forward="true" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collag/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="42" column="14" lean-forward="true" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <folding>
+            <element signature="e#25#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_pb/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collag/celery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collag/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="47" />
+          <folding>
+            <element signature="e#630#662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_pb/backend.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-309">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_pb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_pb/static/celery_pb/celery_progress.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collage/templates/collage/progress.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/celery/result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="478" selection-start-line="478" selection-end-line="478" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/http/response.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="290" selection-start-line="290" selection-end-line="290" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/utils/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/collage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="144" column="46" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="46" />
+        <state relative-caret-position="172">
+          <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
@@ -946,8 +929,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/collage/templates/collage/input.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="228">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
         </state>
       </provider>
     </entry>

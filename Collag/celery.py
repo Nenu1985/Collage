@@ -6,9 +6,10 @@ from celery import Celery
 # solved problem:
 # https://stackoverflow.com/questions/45744992/celery-raises-valueerror-not-enough-values-to-unpack
 # On Windows worker stars by:
-# ---> 'celery -A <module> worker -l info -P eventlet'
+# ---> 'celery -A <module> worker -l info -P eventlet
+# celery -A Collag worker -l info -P eventlet'
 # rather than
-# --->'celery -A proj worker -l info'
+# --->'celery -A Collag worker -l info -E'
 # or (better)
 # add a string to this file: 'os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 #
@@ -16,7 +17,7 @@ from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Collag.settings')
-os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
+#os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
 
 app = Celery('Collag')
 
@@ -28,6 +29,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+#app.autodiscover_tasks(packages='Collag')
 
 
 @app.task(bind=True)

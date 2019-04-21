@@ -15,4 +15,5 @@ urlpatterns = [
     path('view/<int:collage_id>/', views.collage_view, name='view'),
     path('view/<int:collage_id>/processing/', views.collage_view_processing, name='processing'),
     path('view/async', views.async_example, name='async'),
+    path('view/progress', views.progress, name='progress')
 ]

@@ -5,7 +5,7 @@
 {% block content %}
     {% load static %}
     <script type="text/javascript" src="{% static  'collage/jquery-3.4.0.js' %}"></script>
-    <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+    <script src="{% static 'celery_pb/celery_progress.js' %}"></script>
     <script>
 
         $(document).ready(function () {
@@ -34,16 +34,9 @@
                     },
 
                     success: function (data_celery_url) {
-
-
-                                var progressUrl = data_celery_url ;
-
-
+                        var progressUrl = data_celery_url;
                         CeleryProgressBar.initProgressBar(progressUrl)
-
-                        //alert('Now and then')
                     },
-
                 });
 
             })
@@ -53,7 +46,7 @@
     {% csrf_token %}
     <input id="input_count" type="number" value="1" min="1" max="10000"></p>
     <input id="button_do_it" type="button" value="Отправить" onclick="doIt()">
-    <input id="button_progress_launch" type="button" value="Запустить прогресс" >
+    <input id="button_progress_launch" type="button" value="Запустить прогресс">
 
     <form id="collage_form" action="{% url 'collage:input' %}" method="post">
         {% csrf_token %}

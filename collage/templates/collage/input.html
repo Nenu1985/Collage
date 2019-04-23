@@ -11,12 +11,15 @@
         $(document).ready(function () {
             $('#collage_form').submit(function () { // catch the form's submit event
                 $.ajax({ // create an AJAX call...
-                    data: $(this).serialize() + "&query_type=" + "collage_launch", // get the form data
+                    data: $(this).serialize() +
+                        "&query_type=" + "collage_launch", // get the form data
                     type: $(this).attr('method'), // GET or POST
                     url: $(this).attr('action'), // the file to call
-                    success: function (response) { // on success..
+                    success: function (data_celery_url) { // on success..
+                        CeleryProgressBar.initProgressBar(data_celery_url)
                         $("#some_text")[0].textContent += '&'
-                        {#$('#DIV_CONTAINING_FORM').html(response); // update the DIV#}
+                        // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
+
                     }
                 });
                 return false;
@@ -58,12 +61,7 @@
 
         <br>
         <input id="submit" type="submit" value="OK">
-        {#        <input id="button_collage_launch" type="submit" value="OK" onclick="collage_launch()">#}
-        {#    <button class="btn btn-primary" type="button" disabled>#}
-        {#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
-        {#  Loading...#}
-        {#</button>#}
-        <div id="DIV_CONTAINING_FORM">
+       <div id="DIV_CONTAINING_FORM">
             div<br>
         </div>
     </form>
@@ -81,6 +79,9 @@
     </div>
     <div id="progress-bar-message">Waiting for progress to start...</div>
 
+<div id="div-photo">
+    <img id="photo" src="">
+</div>
     {#----------------JAVASCRIPT---------------------------------------#}
     <script>
 
@@ -89,16 +90,18 @@
         })
 
         $('#submit').click(function () {
-            //alert('clicked')
+             $("#photo")[0].src = ""
             $("#spinner").css("-webkit-animation-play-state", "running");
-            setTimeout(myPeriodicMethod, 100);
+             $('#progress-bar-message')[0].innerHTML = "Waiting...!"
+            setTimeout(myPeriodicMethod, 200);
             //$("#some_text")[0].textContent += 'xx'
         })
 
         function myPeriodicMethod() {
-            //$("#some_text")[0].textContent += 1
+            if ($('#progress-bar-message')[0].innerHTML === "Success!"){
+                $("#spinner").css("-webkit-animation-play-state", "paused");
 
-            $.ajax({
+                $.ajax({
                 type: "POST",
                 url: "{% url 'collage:input' %}",
                 data: {
@@ -106,15 +109,20 @@
                     query_type: 'poll'
                 },
                 success: function (data) {
-                    $("#some_text")[0].textContent += '.'
+
+                    $("#photo")[0].src = data
                     //alert('Now and then')
                 },
                 complete: function () {
                     // schedule the next request *only* when the current one is complete:
-                    setTimeout(myPeriodicMethod, 200);
+                    //setTimeout(myPeriodicMethod, 200);
                 }
             });
-            //$("#some_text")[0].textContent += 1
+
+            }
+            else {
+                setTimeout(myPeriodicMethod, 200);
+            }
         }
 
 

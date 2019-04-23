@@ -6,7 +6,7 @@ from .models import Collage
 from time import sleep
 import time
 from celery_pb.backend import ProgressRecorder
-
+from django.db import transaction
 
 @shared_task
 def add(x, y):
@@ -23,16 +23,29 @@ def xsum(numbers):
     return sum(numbers)
 
 
-@shared_task
-def launch_processing(collage_id):
+@shared_task(bind=True)
+def launch_processing(self, collage_id):
+
+    # instance for progressbar status update
+    progress_recorder = ProgressRecorder(self)
+
+    # collage instance
     collage = Collage.objects.get(id=collage_id)
+
+    # get photo urls by flickr api
     photo_urls = collage.get_photos_urls()
+    #photo_urls = [8,8,8,8,8,8,8,8]
 
     # download, store and return photos
     for i, url in enumerate(photo_urls):
         new_photo = collage.download_photos_by_url(url)
-        new_photo.save()
-        collage.photos.add(new_photo)
+        with transaction.atomic():
+            new_photo.save()
+            collage.photos.add(new_photo)
+            progress_recorder.set_progress(collage.photos.count(), collage.photo_number)
+
+    progress_recorder.set_progress(collage.photo_number, collage.photo_number)
+
 
     return "Collage created. Id = {}, " \
            "Date = {}".format(collage.id,

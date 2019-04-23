@@ -15,6 +15,7 @@ import os
 import numpy as np
 import uuid
 from auth_app.models import CustomUser
+from django.db import transaction
 
 class PhotoSize(models.Model):
     size = models.IntegerField(default=128)
@@ -121,14 +122,12 @@ class Collage(models.Model):
         """
         # file_name = f'collage\photo\\src{str(num)}.jpg'
 
-        if Photo.objects.filter(photo_url=photo_url).exists():
+        if Photo.objects.filter(photo_url=photo_url).first().exists():
             return Photo.objects.get(photo_url=photo_url)
 
         # urllib.request.urlretrieve(photo_url, file_name)
 
-        photo = Photo()
-        photo.photo_url = photo_url
-        photo.date = timezone.now()
+
 
         with TemporaryFile() as tf:
             r = requests.get(photo_url, stream=True)
@@ -136,7 +135,11 @@ class Collage(models.Model):
                 tf.write(chunk)
 
             tf.seek(0)
-            photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
+            with transaction.atomic():
+                photo = Photo()
+                photo.photo_url = photo_url
+                photo.date = timezone.now()
+                photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
 
         return photo
     #

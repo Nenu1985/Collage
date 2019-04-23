@@ -62,16 +62,20 @@ def collage_input(request):
         return render(request, 'collage/input.html', context)
     elif request.method == 'POST':
         if request.is_ajax() and request.method == 'POST':
+
             if "query_type" in request.POST and request.POST["query_type"]:
                 query_type = request.POST["query_type"]
             else:
                 query_type = 'none'
 
             if query_type == 'poll':
-                context = {
-                    'some_text': 'poll'
-                }
-                return HttpResponse('Ok')
+
+                collage = Collage.objects.filter(user=request.user).latest('id')
+                collage.get_cv2_images()
+                collage.generate_collage()
+
+                return HttpResponse(collage.final_img.url)
+
             elif query_type == 'collage_launch':
                 collage_input_form = CollageInputForm(request.POST)
                 if collage_input_form.is_valid():
@@ -82,13 +86,11 @@ def collage_input(request):
                 collage.user = request.user
                 collage.save()
 
-                # launch_processing.delay(collage.pk)
-                test_long_task.delay()
+                res = launch_processing.delay(collage.pk)
 
-                context = {
-                    'some_text': 'Launched!'
-                }
-                return HttpResponse('Ok')
+                response = reverse('celery_progress:task_status', kwargs={'task_id': res.task_id})
+                return HttpResponse(response)
+
             elif query_type == 'progress_launch':
                 result = my_task.delay(10)
                 response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})

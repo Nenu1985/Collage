@@ -28,14 +28,14 @@ def launch_processing(self, collage_id):
 
     # instance for progressbar status update
     progress_recorder = ProgressRecorder(self)
-
+    print('launch_processing: start!')
     # collage instance
     collage = Collage.objects.get(id=collage_id)
 
     # get photo urls by flickr api
     photo_urls = collage.get_photos_urls()
     #photo_urls = [8,8,8,8,8,8,8,8]
-
+    print('launch_processing: urls retrieved!')
     # download, store and return photos
     for i, url in enumerate(photo_urls):
         new_photo = collage.download_photos_by_url(url)

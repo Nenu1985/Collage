@@ -121,27 +121,29 @@ class Collage(models.Model):
         :return: photo model instance
         """
         # file_name = f'collage\photo\\src{str(num)}.jpg'
+        try:
+            check_photo_exists = Photo.objects.filter(photo_url=photo_url).first()
+            if check_photo_exists:
+                collage_inst = check_photo_exists.collage_set.filter(id=self.id)
+                if collage_inst and collage_inst.photo_size == self.photo_size:
+                    return Photo.objects.filter(photo_url=photo_url).first()
+        except Exception as e:
+            ptint('download_photos_by_url' + e)
+        finally:
 
-        if Photo.objects.filter(photo_url=photo_url).first().exists():
-            return Photo.objects.get(photo_url=photo_url)
+            with TemporaryFile() as tf:
+                r = requests.get(photo_url, stream=True)
+                for chunk in r.iter_content(chunk_size=4096):
+                    tf.write(chunk)
 
-        # urllib.request.urlretrieve(photo_url, file_name)
+                tf.seek(0)
+                with transaction.atomic():
+                    photo = Photo()
+                    photo.photo_url = photo_url
+                    photo.date = timezone.now()
+                    photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
 
-
-
-        with TemporaryFile() as tf:
-            r = requests.get(photo_url, stream=True)
-            for chunk in r.iter_content(chunk_size=4096):
-                tf.write(chunk)
-
-            tf.seek(0)
-            with transaction.atomic():
-                photo = Photo()
-                photo.photo_url = photo_url
-                photo.date = timezone.now()
-                photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
-
-        return photo
+            return photo
     #
     def get_cv2_images(self):
         photos_to_cut = self.photos.all();
@@ -169,14 +171,14 @@ class Collage(models.Model):
         if x_c + iw_h > i_w:
             outx_c -= iw_h - (i_w - x_c)
         elif x_c - iw_h < 0:
-            outx_c += iw_h - (x_c)
+            outx_c += iw_h - x_c
 
         if y_c + iw_h > i_h:
             outy_c -= iw_h - (i_h - y_c)
         elif y_c - iw_h < 0:
-            outy_c += iw_h - (y_c)
+            outy_c += iw_h - y_c
 
-        return (outx_c, outy_c)
+        return outx_c, outy_c
 
     @classmethod
     def resize_img(cls, collage, photo):
@@ -193,20 +195,59 @@ class Collage(models.Model):
 
         iw_h = collage.photo_size.size >> 1  # half of img width
         src_img = cv2.imread(photo.img_field.path)
+
+        processing_img = src_img.copy()
+
         frame_height = src_img.shape[0]
         frame_width = src_img.shape[1]
 
-        roi = Collage.get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
-        #face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
+        # resize source image for better processing
+        in_height = 300  # initial image height for good face detect
+        in_width = int((frame_width / frame_height) * in_height)
+        processing_img = cv2.resize(processing_img, (in_width, in_height))
+
+        # get classifier
+        face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
+
+        # face detector
+        faces = face_cascade.detectMultiScale(cv2.cvtColor(processing_img,
+                                                           cv2.COLOR_BGR2GRAY))
+        roi = (0,0)
+        # choose the first face, find center of rect
+        if not list(faces):  # if no face detected select the middle of the picture
+            roi = Collage.get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
+
+        else:  # faces are detected, select one of them
+            x_center = int((faces[0][0] + faces[0][2] / 2) * (frame_width / in_width))
+            y_center = int((faces[0][1] + faces[0][3] / 2) * (frame_height / in_height))
+            roi = Collage.get_roi(x_center, y_center, frame_width, frame_height, iw_h)
+
+        if roi[1] < iw_h:  # height
+            scale_coef = iw_h / roi[1]
+            src_img = cv2.resize(src_img, (iw_h << 1, int(src_img.shape[1]*scale_coef)))
+
+        elif roi[0] < iw_h: # width
+            scale_coef = iw_h / roi[0]
+            src_img = cv2.resize(src_img, (int(src_img.shape[0] * scale_coef), iw_h << 1))
+
+            # cv2.resize(src_img, fx=scale_coef, fy=scale_coef)
+
         out_small_image = src_img[roi[1] - iw_h:roi[1] + iw_h - 1,
                           roi[0] - iw_h:roi[0] + iw_h - 1].copy()
+        if not list(faces):
+        # draw a red cross:
+            cv2.line(out_small_image, (5, 5), (15, 15), (0, 0, 255), thickness=2)
+            cv2.line(out_small_image, (15, 5), (5, 15), (0, 0, 255), thickness=2)
+        else:
+            cv2.line(out_small_image, (5, 5), (7, 14), (0, 255, 0), thickness=2)
+            cv2.line(out_small_image, (7, 14), (14, 5), (0, 255, 0), thickness=2)
+        #roi = Collage.get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
+        #face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
+        # out_small_image = src_img[roi[1] - iw_h:roi[1] + iw_h - 1,
+        #                   roi[0] - iw_h:roi[0] + iw_h - 1].copy()
+
 
         cut_photo = CutPhoto()
-
-
-        #cut_photo.img_field = f_name
-        #cut_photo.img_field.save()
-
         cut_photo.photo_src = photo
 
         Collage.save_mat_to_image_field(out_small_image, cut_photo.img_field)
@@ -248,12 +289,15 @@ class Collage(models.Model):
             cut_photo = photo.cutphoto
             img = cv2.imread(cut_photo.img_field.path)
             imgs.append(img)
+        try:
+            for row in range(rows):
+                for col in range(self.cols_number):
+                    big_img[row * size: row * size + size - 1,
+                            col * size: col * size + size - 1,
+                            :] = imgs[row*self.cols_number + col]
+        except Exception as e:
+            print(e)
 
-        for row in range(rows):
-            for col in range(self.cols_number):
-                big_img[row * size: row * size + size - 1,
-                        col * size: col * size + size - 1,
-                        :] = imgs[row*self.cols_number + col]
 
         Collage.save_mat_to_image_field(big_img, self.final_img)
 

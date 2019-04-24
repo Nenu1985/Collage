@@ -48,17 +48,14 @@ def get_photo(request, collage_id):
     #     }
     return HttpResponse('get_photo')
 
+
 @csrf_protect
 def collage_input(request):
     if request.method == 'GET':
 
         context = {
             'collage_input': CollageInputForm(),
-            'some_text': 'get request',
-
-
         }
-
         return render(request, 'collage/input.html', context)
     elif request.method == 'POST':
         if request.is_ajax() and request.method == 'POST':
@@ -69,7 +66,7 @@ def collage_input(request):
                 query_type = 'none'
 
             if query_type == 'poll':
-
+                # When images downloaded!
                 collage = Collage.objects.filter(user=request.user).latest('id')
                 collage.get_cv2_images()
                 collage.generate_collage()
@@ -101,8 +98,6 @@ def collage_input(request):
             return HttpResponse(status=405)
     else:
         return HttpResponse(status=405)
-
-
 
 
 @login_required

@@ -4,6 +4,7 @@ from .models import Collage, PhotoSize
 from .forms import CollageInputForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 import threading
 from django.shortcuts import render_to_response
@@ -15,7 +16,7 @@ from .tasks import launch_processing, test_long_task, test_long_task2, my_task, 
 
 # Create your views here.
 def index(request):
-    collages = Collage.objects.all()[:5]
+    collages = get_list_or_404(Collage.objects.all().order_by('-id')[:10])
     return render(request, 'collage/index.html', {'collages': collages})
 
 

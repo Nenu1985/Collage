@@ -168,15 +168,18 @@ class Collage(models.Model):
         outx_c = x_c
         outy_c = y_c
 
-        if x_c + iw_h > i_w:
+        if x_c + iw_h > i_w and outx_c - (iw_h - (i_w - x_c)) > iw_h:
             outx_c -= iw_h - (i_w - x_c)
-        elif x_c - iw_h < 0:
+        elif x_c - iw_h < 0 and outx_c + (iw_h - x_c) < i_w:
             outx_c += iw_h - x_c
 
-        if y_c + iw_h > i_h:
+        if y_c + iw_h > i_h and outy_c - (iw_h - (i_h - y_c)) > iw_h:
             outy_c -= iw_h - (i_h - y_c)
-        elif y_c - iw_h < 0:
+        elif y_c - iw_h < 0 and outy_c + (iw_h - y_c) < i_w:
             outy_c += iw_h - y_c
+
+        assert outx_c >= iw_h, 'outx_c {} + iw_h {}'.format(outx_c, iw_h)
+        assert outy_c >= iw_h, 'outy_c {} + iw_h {}'.format(outy_c, iw_h)
 
         return outx_c, outy_c
 
@@ -193,11 +196,26 @@ class Collage(models.Model):
         if exists:
             return
 
+        iw = collage.photo_size.size
         iw_h = collage.photo_size.size >> 1  # half of img width
         src_img = cv2.imread(photo.img_field.path)
 
-        processing_img = src_img.copy()
 
+
+        frame_height = src_img.shape[0]
+        frame_width = src_img.shape[1]
+
+        # adjust src_img shape to shape that not less than required size
+        # newimg = cv2.resize(oriimg, (int(newX), int(newY)))
+        if frame_height < iw:  # height
+            scale_coef = iw / frame_height
+            src_img = cv2.resize(src_img, (int(src_img.shape[1]*scale_coef), iw))
+
+        elif frame_width < iw: # width
+            scale_coef = iw / frame_width
+            src_img = cv2.resize(src_img, (iw, int(src_img.shape[0] * scale_coef)))
+
+        processing_img = src_img.copy()
         frame_height = src_img.shape[0]
         frame_width = src_img.shape[1]
 
@@ -222,13 +240,7 @@ class Collage(models.Model):
             y_center = int((faces[0][1] + faces[0][3] / 2) * (frame_height / in_height))
             roi = Collage.get_roi(x_center, y_center, frame_width, frame_height, iw_h)
 
-        if roi[1] < iw_h:  # height
-            scale_coef = iw_h / roi[1]
-            src_img = cv2.resize(src_img, (iw_h << 1, int(src_img.shape[1]*scale_coef)))
 
-        elif roi[0] < iw_h: # width
-            scale_coef = iw_h / roi[0]
-            src_img = cv2.resize(src_img, (int(src_img.shape[0] * scale_coef), iw_h << 1))
 
             # cv2.resize(src_img, fx=scale_coef, fy=scale_coef)
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
-from .models import Collage, PhotoSize
+from .models import Collage
 from .forms import CollageInputForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -79,7 +79,6 @@ def collage_input(request):
                 else:
                     return HttpResponse(status=405)
 
-                collage.user = request.user
                 collage.save()
 
                 # launch_processing.delay(collage.pk)

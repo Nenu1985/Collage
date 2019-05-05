@@ -14,9 +14,11 @@ import cv2
 import os
 import numpy as np
 import uuid
-from auth_app.models import CustomUser
+
+
 
 class PhotoSize(models.Model):
+
     size = models.IntegerField(default=128)
 
     def __str__(self):
@@ -31,7 +33,7 @@ class Photo(models.Model):
 
 
 class CutPhoto(models.Model):
-    #photo_src = models.ForeignKey(Photo, on_delete=models.CASCADE, unique=True)
+
     photo_src = models.OneToOneField(Photo, on_delete=models.CASCADE)
     img_field = models.ImageField(upload_to='cut_collage_photos', unique=True)
     date = models.DateTimeField(auto_now_add=True)
@@ -49,7 +51,6 @@ class Collage(models.Model):
     photos = models.ManyToManyField(Photo, blank=True)
 
     final_img = models.ImageField(upload_to='collages', blank=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return 'Collage N = {0}; ' \

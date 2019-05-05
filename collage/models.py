@@ -16,9 +16,8 @@ import numpy as np
 import uuid
 
 
-
+# model.py
 class PhotoSize(models.Model):
-
     size = models.IntegerField(default=128)
 
     def __str__(self):

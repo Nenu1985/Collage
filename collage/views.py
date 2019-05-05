@@ -104,6 +104,8 @@ def get_celery_worker_status():
         d = { ERROR_KEY: msg }
     except ImportError as e:
         d = { ERROR_KEY: str(e)}
+    except Exception as e:
+        d = { ERROR_KEY: str(e)}
     return d
 
 

@@ -18,7 +18,7 @@ from collage.models import Collage
 #     sizes = PhotoSize.objects.all().order_by('size')
 #     photo_size = forms.ModelChoiceField(queryset=sizes, empty_label=sizes.first(), to_field_name='size')
 #     #photo_size = forms.IntegerField()
-
+# forms.py
 class CollageInputForm(forms.ModelForm):
     class Meta:
         model = Collage
@@ -26,7 +26,7 @@ class CollageInputForm(forms.ModelForm):
             'final_img',
             'photos',
             'create_date',
-            'user',
+
         ]
     def save(self, commit=True):
 

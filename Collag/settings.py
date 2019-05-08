@@ -134,8 +134,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-
 GLOBAL_SETTINGS = {
     'FLICKR_PUBLIC': '1f9874c1a8ea5a85acfd419dd0c2c7e1',
     'FLICKR_SECRET': '67de04d2825fd397',

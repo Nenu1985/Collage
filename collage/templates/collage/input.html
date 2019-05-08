@@ -7,75 +7,35 @@
     <script type="text/javascript" src="{% static  'collage/jquery-3.4.0.js' %}"></script>
     <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
     <script>
-
         $(document).ready(function () {
             $('#collage_form').submit(function () { // catch the form's submit event
                 $.ajax({ // create an AJAX call...
                     data: $(this).serialize() + "&query_type=" + "collage_launch", // get the form data
                     type: $(this).attr('method'), // GET or POST
                     url: $(this).attr('action'), // the file to call
-                    success: function (response) { // on success..
-
-                        $("#some_text")[0].textContent = response
-
-                        {#$('#DIV_CONTAINING_FORM').html(response); // update the DIV#}
+                    success: function (data_celery_url) { // on success..
+                        var progressUrl = data_celery_url;
+                        CeleryProgressBar.initProgressBar(progressUrl)
                     }
                 });
                 return false;
             });
-
-
-            $('#button_progress_launch').click(function () {
-                {#alert('alert!')#}
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'collage:input' %}",
-                    data: {
-                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-                        query_type: 'progress_launch'
-                    },
-
-                    success: function (data_celery_url) {
-
-
-                                var progressUrl = data_celery_url ;
-
-
-                        CeleryProgressBar.initProgressBar(progressUrl)
-
-                        //alert('Now and then')
-                    },
-
-                });
-
-            })
         })
     </script>
-
-    {% csrf_token %}
 
 
     <form id="collage_form" action="{% url 'collage:input' %}" method="post">
         {% csrf_token %}
         <table>
-        {{ collage_input.as_table }}
+            {{ collage_input.as_table }}
         </table>
-
-        <div class="spinner-border" role="status" id="spinner">
-            <span class="sr-only">Loading...</span>
-        </div>
-
-        <br>
         <input id="submit" type="submit" value="Создать">
-        {#        <input id="button_collage_launch" type="submit" value="OK" onclick="collage_launch()">#}
-        {#    <button class="btn btn-primary" type="button" disabled>#}
-        {#  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>#}
-        {#  Loading...#}
-        {#</button>#}
-        <div id="DIV_CONTAINING_FORM">
-            <br>
-        </div>
     </form>
+
+    <div class='progress-wrapper'>
+        <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+    </div>
+    <div id="progress-bar-message"></div>
 
     <div id="some_text">
         {% if  some_text %}
@@ -85,10 +45,7 @@
         {% endif %}
 
     </div>
-    <div class='progress-wrapper'>
-        <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
-    </div>
-    <div id="progress-bar-message">Waiting for progress to start...</div>
+
 
     {#----------------JAVASCRIPT---------------------------------------#}
     <script>
@@ -101,7 +58,7 @@
         $('#submit').click(function () {
             //alert('clicked')
             $("#spinner").css("-webkit-animation-play-state", "running");
-             $("#spinner").show()
+            {#$("#spinner").show()#}
             //$("#some_text")[0].textContent += 'xx'
         })
 

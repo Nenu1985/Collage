@@ -1,5 +1,5 @@
 from django.shortcuts import render, reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Collage
 from .forms import CollageInputForm
 import threading
@@ -34,61 +34,55 @@ def get_photo(request, collage_id):
 
 
 @csrf_protect
+# views.py
 def collage_input(request):
-    if request.method == 'GET':
 
+    if request.method == 'GET':
         context = {
             'collage_input': CollageInputForm(),
-            # 'some_text': 'get request',
-
-
-        }
-
+         }
         return render(request, 'collage/input.html', context)
-    elif request.method == 'POST':
-        if request.is_ajax() and request.method == 'POST':
-            if "query_type" in request.POST and request.POST["query_type"]:
-                query_type = request.POST["query_type"]
+
+    elif request.is_ajax() and request.method == 'POST':
+
+        query_type = request.POST["query_type"]
+
+        if query_type == 'poll':
+            return HttpResponse('poll request processed')
+
+        elif query_type == 'collage_launch':
+
+            collage_input_form = CollageInputForm(request.POST)
+
+            if collage_input_form.is_valid():
+                collage = collage_input_form.save(commit=False)
             else:
-                query_type = 'none'
+                return Http404('Неверно заполнена форма!')
 
-            if query_type == 'poll':
-                context = {
-                    'some_text': 'poll'
-                }
-                return HttpResponse('Ok')
-            elif query_type == 'collage_launch':
-                collage_input_form = CollageInputForm(request.POST)
-                if collage_input_form.is_valid():
-                    collage = collage_input_form.save(commit=False)
-                else:
-                    return HttpResponse(status=405)
+            collage.save()
 
-                collage.save()
+            celery_status = get_celery_worker_status()
 
-                celery_status = get_celery_worker_status()
-                # launch_processing.delay(collage.pk)
-                if celery_status.get('ERROR', None):
-                    return HttpResponse(celery_status.get('ERROR'))
+            if celery_status.get('ERROR', None):
+                return HttpResponse(celery_status.get('ERROR'))
 
-                task_id = test_long_task.delay()
+            # task_id = launch_processing.delay(collage.pk)
+            # task_id = test_long_task.delay()
+            result = my_task.delay(10)
+            response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})
+            return HttpResponse(response)
 
-                context = {
-                    'some_text': 'Launched!'
-                }
-                return HttpResponse('Task launched! Task id = {}'.format(task_id))
-            elif query_type == 'progress_launch':
-                result = my_task.delay(10)
-                response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})
-                return HttpResponse(response)
-            else:
-                return HttpResponse(status=405)
-        else:
-            return HttpResponse(status=405)
+        elif query_type == 'progress_launch':
+            result = my_task.delay(10)
+            response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})
+            return HttpResponse(response)
     else:
-        return HttpResponse(status=405)
+        return Http404('Данный тип запроса не поддерживается')
+
+
 
 def get_celery_worker_status():
+
     ERROR_KEY = "ERROR"
     try:
         insp = app.control.inspect()

@@ -73,46 +73,33 @@ class Collage(models.Model):
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
 
-    # def launch_processing(self):
-    #     photo_urls = self.get_photos_urls()
-    #
-    #     # download, store and return photos
-    #     for i, url in enumerate(photo_urls):
-    #         new_photo = self.download_photos_by_url(url)
-    #         new_photo.save()
-    #         self.photos.add(new_photo)
-    #
-    #
+    # models.py
     def get_photos_urls(self):
+
         flickr = flickrapi.FlickrAPI(
             settings.GLOBAL_SETTINGS['FLICKR_PUBLIC'],
             settings.GLOBAL_SETTINGS['FLICKR_SECRET'],
             cache=True
         )
-        flickr.cache = cache
 
-        extras = "url_s"        # 75 pixels per side and above
-        if self.photo_size == 128:
-            extras = "url_q"    # 150 pixels per side and above
-        else:
-            extras = "url_n"    # 320 pixels per side and above
+        # экстра-параметр размера изображений (75 пикселей)
+        extras = "url_s"
 
+        # создаём генератор ссылок
         photos = flickr.walk(text=self.photo_tag,
-                             per_page=int(self.photo_number*1.2),  # may be you can try different numbers..
+                             per_page=20,
                              extras=extras
                              )
-        urls = []
-        num_of_photos = self.photo_number - 1
+        urls = []  # список ссылок
+
+        # извлекаем ссылки
         for i, photo in enumerate(photos):
-            url = photo.get(extras, 'no url')
-            if url != 'no url':  # if url is empty - pass it and increment photo number
-                urls.append(url)
-            else:
-                num_of_photos += 1
-            if i >= num_of_photos:
+            urls.append(photo.get(extras, 'no url'))
+            if i >= self.photo_number - 1:
                 break
+
         return urls
-    #
+    # models.py
     def download_photos_by_url(self, photo_url):
         """
         Download a photo by url, save it to DB in photo model, return Photo instance
@@ -149,65 +136,6 @@ class Collage(models.Model):
 
         return images
 
-    @classmethod
-    def get_roi(cls, x_c: int, y_c: int, i_w: int, i_h: int, iw_h: int):
-        """
-        find ROI of image
-        :param x_c: center X coord of ROI, pixels (int)
-        :param y_c: center Y coord of ROI, pixels (int)
-        :param i_w: input img width
-        :param i_h: input img height
-        :param iw_h: half of output img with and height
-        :return: tuple(outxc, outyc)
-        """
-        outx_c = x_c
-        outy_c = y_c
-
-        if x_c + iw_h > i_w:
-            outx_c -= iw_h - (i_w - x_c)
-        elif x_c - iw_h < 0:
-            outx_c += iw_h - (x_c)
-
-        if y_c + iw_h > i_h:
-            outy_c -= iw_h - (i_h - y_c)
-        elif y_c - iw_h < 0:
-            outy_c += iw_h - (y_c)
-
-        return (outx_c, outy_c)
-
-    @classmethod
-    def resize_img(cls, collage, photo):
-        """
-        Resize input image to some size
-        :param photo: source photo instance
-        :param collage: collage with photo src_img
-        :return: resized image, type: numpy.ndarray
-        """
-        exists = CutPhoto.objects.filter(photo_src=photo).first()
-
-        if exists:
-            return
-
-        iw_h = collage.photo_size.size >> 1  # half of img width
-        src_img = cv2.imread(photo.img_field.path)
-        frame_height = src_img.shape[0]
-        frame_width = src_img.shape[1]
-
-        roi = Collage.get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
-        #face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
-        out_small_image = src_img[roi[1] - iw_h:roi[1] + iw_h - 1,
-                          roi[0] - iw_h:roi[0] + iw_h - 1].copy()
-
-        cut_photo = CutPhoto()
-
-
-        #cut_photo.img_field = f_name
-        #cut_photo.img_field.save()
-
-        cut_photo.photo_src = photo
-
-        Collage.save_mat_to_image_field(out_small_image, cut_photo.img_field)
-        cut_photo.save()
 
     @classmethod
     def save_mat_to_image_field(cls, image, img_field):
@@ -255,7 +183,58 @@ class Collage(models.Model):
         Collage.save_mat_to_image_field(big_img, self.final_img)
 
 
+    # model.py
+    def resize_img(self, collage, photo):
+        """
+        Resize input image to some size
+        :param photo: source photo instance
+        :param collage: collage with photo src_img
+        :return: resized image, type: numpy.ndarray
+        """
+        exists = CutPhoto.objects.filter(photo_src=photo).first()
+
+        if exists:
+            return
+
+        iw_h = collage.photo_size.size >> 1  # half of img width
+        src_img = cv2.imread(photo.img_field.path)
+        frame_height = src_img.shape[0]
+        frame_width = src_img.shape[1]
+
+        roi = get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
+        #face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
+        out_small_image = src_img[roi[1] - iw_h:roi[1] + iw_h - 1,
+                          roi[0] - iw_h:roi[0] + iw_h - 1].copy()
+
+        cut_photo = CutPhoto()
+        cut_photo.photo_src = photo
+
+        Collage.save_mat_to_image_field(out_small_image, cut_photo.img_field)
+        cut_photo.save()
 
 
+# models.py
+def get_roi(x_c: int, y_c: int, i_w: int, i_h: int, iw_h: int):
+    """
+    find ROI of image
+    :param x_c: center X coord of ROI, pixels (int)
+    :param y_c: center Y coord of ROI, pixels (int)
+    :param i_w: input img width
+    :param i_h: input img height
+    :param iw_h: half of output img with and height
+    :return: tuple(outxc, outyc)
+    """
+    outx_c = x_c
+    outy_c = y_c
 
+    if x_c + iw_h > i_w:
+        outx_c -= iw_h - (i_w - x_c)
+    elif x_c - iw_h < 0:
+        outx_c += iw_h - (x_c)
 
+    if y_c + iw_h > i_h:
+        outy_c -= iw_h - (i_h - y_c)
+    elif y_c - iw_h < 0:
+        outy_c += iw_h - (y_c)
+
+    return (outx_c, outy_c)

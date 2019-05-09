@@ -7,6 +7,7 @@ from django.urls import reverse
 # Create your tests here.
 
 
+# tests.py
 class CollageModelTests(TestCase):
 
     def test_collage_creation(self):
@@ -20,6 +21,7 @@ class CollageModelTests(TestCase):
          )
         self.assertTrue(collage)
 
+    # tests.py
     def test_collage_creation_without_size(self):
 
         with self.assertRaises(IntegrityError):
@@ -29,7 +31,7 @@ class CollageModelTests(TestCase):
              )
 
 
-class ViewsModelTest(TestCase):
+class ViewsTest(TestCase):
     client = Client()
 
     def test_load_start_page(self):

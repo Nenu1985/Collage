@@ -156,7 +156,7 @@ class Collage(models.Model):
         except Exception:
             print(Exception)
 
-
+    # models.py
     def generate_collage(self):
         photos = self.photos.all()
 
@@ -184,7 +184,7 @@ class Collage(models.Model):
 
 
     # model.py
-    def resize_img(self, collage, photo):
+    def resize_img(self, photo):
         """
         Resize input image to some size
         :param photo: source photo instance
@@ -196,7 +196,7 @@ class Collage(models.Model):
         if exists:
             return
 
-        iw_h = collage.photo_size.size >> 1  # half of img width
+        iw_h = self.photo_size.size >> 1  # half of img width
         src_img = cv2.imread(photo.img_field.path)
         frame_height = src_img.shape[0]
         frame_width = src_img.shape[1]

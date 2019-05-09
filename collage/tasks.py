@@ -7,21 +7,8 @@ from time import sleep
 import time
 from celery_pb.backend import ProgressRecorder
 
-
-@shared_task
-def add(x, y):
-    return x + y
-
-
-@shared_task
-def mul(x, y):
-    return x * y
-
-
-@shared_task
-def xsum(numbers):
-    return sum(numbers)
-
+# tasks.py
+from celery import shared_task, task
 
 @shared_task
 def launch_processing(collage_id):
@@ -34,6 +21,8 @@ def launch_processing(collage_id):
         new_photo.save()
         collage.photos.add(new_photo)
 
+    # collage.get_cv2_images()
+    collage.generate_collage()
     return "Collage created. Id = {}, " \
            "Date = {}".format(collage.id,
                               collage.create_date.strftime("%d %b %Y %H:%M:%S"))

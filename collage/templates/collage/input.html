@@ -17,9 +17,8 @@
                     url: $(this).attr('action'), // the file to call
                     success: function (data_celery_url) { // on success..
                         CeleryProgressBar.initProgressBar(data_celery_url)
-                        $("#some_text")[0].textContent += '&'
+                        // $("#some_text")[0].textContent += '&'
                         // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
-
                     }
                 });
                 return false;
@@ -27,7 +26,7 @@
 
 
             $('#button_progress_launch').click(function () {
-                {#alert('alert!')#}
+                //{#alert('alert!')#}
                 $.ajax({
                     type: "POST",
                     url: "{% url 'collage:input' %}",
@@ -48,12 +47,13 @@
 
     {% csrf_token %}
 
+    <!---------------------- PAGE CONTENT! ---------------------------->
+
     <form id="collage_form" action="{% url 'collage:input' %}" method="post">
         {% csrf_token %}
-        {{ collage_input.as_p }}
-
-
-
+        <table>
+        {{ collage_input.as_table }}
+            </table>
         <br>
         <input id="submit" type="submit" value="OK">
        <div id="DIV_CONTAINING_FORM">

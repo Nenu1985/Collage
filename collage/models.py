@@ -14,7 +14,7 @@ import cv2
 import os
 import numpy as np
 import uuid
-
+from django.db import transaction
 
 # model.py
 class PhotoSize(models.Model):
@@ -84,6 +84,10 @@ class Collage(models.Model):
 
         # экстра-параметр размера изображений (75 пикселей)
         extras = "url_s"
+        if self.photo_size == 128:
+            extras = "url_q"    # 150 pixels per side and above
+        else:
+            extras = "url_n"    # 320 pixels per side and above
 
         # создаём генератор ссылок
         photos = flickr.walk(text=self.photo_tag,
@@ -108,24 +112,29 @@ class Collage(models.Model):
         """
         # file_name = f'collage\photo\\src{str(num)}.jpg'
 
-        if Photo.objects.filter(photo_url=photo_url).exists():
-            return Photo.objects.get(photo_url=photo_url)
+        try:
+            check_photo_exists = Photo.objects.filter(photo_url=photo_url).first()
+            if check_photo_exists:
+                collage_inst = check_photo_exists.collage_set.filter(id=self.id)
+                if collage_inst and collage_inst.photo_size == self.photo_size:
+                    return Photo.objects.filter(photo_url=photo_url).first()
+        except Exception as e:
+            ptint('download_photos_by_url' + e)
+        finally:
 
-        # urllib.request.urlretrieve(photo_url, file_name)
+            with TemporaryFile() as tf:
+                r = requests.get(photo_url, stream=True)
+                for chunk in r.iter_content(chunk_size=4096):
+                    tf.write(chunk)
 
-        photo = Photo()
-        photo.photo_url = photo_url
-        photo.date = timezone.now()
+                tf.seek(0)
+                with transaction.atomic():
+                    photo = Photo()
+                    photo.photo_url = photo_url
+                    photo.date = timezone.now()
+                    photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
 
-        with TemporaryFile() as tf:
-            r = requests.get(photo_url, stream=True)
-            for chunk in r.iter_content(chunk_size=4096):
-                tf.write(chunk)
-
-            tf.seek(0)
-            photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
-
-        return photo
+            return photo
     #
     def get_cv2_images(self):
         photos_to_cut = self.photos.all();
@@ -173,12 +182,14 @@ class Collage(models.Model):
             cut_photo = photo.cutphoto
             img = cv2.imread(cut_photo.img_field.path)
             imgs.append(img)
-
-        for row in range(rows):
-            for col in range(self.cols_number):
-                big_img[row * size: row * size + size - 1,
-                        col * size: col * size + size - 1,
-                        :] = imgs[row*self.cols_number + col]
+        try:
+            for row in range(rows):
+                for col in range(self.cols_number):
+                    big_img[row * size: row * size + size - 1,
+                    col * size: col * size + size - 1,
+                    :] = imgs[row * self.cols_number + col]
+        except Exception as e:
+            print(e)
 
         Collage.save_mat_to_image_field(big_img, self.final_img)
 
@@ -227,14 +238,17 @@ def get_roi(x_c: int, y_c: int, i_w: int, i_h: int, iw_h: int):
     outx_c = x_c
     outy_c = y_c
 
-    if x_c + iw_h > i_w:
+    if x_c + iw_h > i_w and outx_c - (iw_h - (i_w - x_c)) > iw_h:
         outx_c -= iw_h - (i_w - x_c)
-    elif x_c - iw_h < 0:
-        outx_c += iw_h - (x_c)
+    elif x_c - iw_h < 0 and outx_c + (iw_h - x_c) < i_w:
+        outx_c += iw_h - x_c
 
-    if y_c + iw_h > i_h:
+    if y_c + iw_h > i_h and outy_c - (iw_h - (i_h - y_c)) > iw_h:
         outy_c -= iw_h - (i_h - y_c)
-    elif y_c - iw_h < 0:
-        outy_c += iw_h - (y_c)
+    elif y_c - iw_h < 0 and outy_c + (iw_h - y_c) < i_w:
+        outy_c += iw_h - y_c
+
+    assert outx_c >= iw_h, 'outx_c {} + iw_h {}'.format(outx_c, iw_h)
+    assert outy_c >= iw_h, 'outy_c {} + iw_h {}'.format(outy_c, iw_h)
 
     return (outx_c, outy_c)

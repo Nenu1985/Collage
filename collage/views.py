@@ -48,7 +48,12 @@ def collage_input(request):
         query_type = request.POST["query_type"]
 
         if query_type == 'poll':
-            return HttpResponse('poll request processed')
+            # When images downloaded!
+            collage = Collage.objects.filter(user=request.user).latest('id')
+            collage.get_cv2_images()
+            collage.generate_collage()
+
+            return HttpResponse(collage.final_img.url)
 
         elif query_type == 'collage_launch':
 
@@ -66,9 +71,10 @@ def collage_input(request):
             if celery_status.get('ERROR', None):
                 return HttpResponse(celery_status.get('ERROR'))
 
-            # task_id = launch_processing.delay(collage.pk)
+            result = launch_processing.delay(collage.pk)
             # task_id = test_long_task.delay()
-            result = my_task.delay(10)
+
+            # result = my_task.delay(10)
             response = reverse('celery_progress:task_status', kwargs={'task_id': result.task_id})
             return HttpResponse(response)
 

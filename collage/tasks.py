@@ -10,19 +10,28 @@ from celery_pb.backend import ProgressRecorder
 # tasks.py
 from celery import shared_task, task
 
-@shared_task
+@shared_task(bind=True)
 def launch_processing(collage_id):
+    # instance for progressbar status update
+    progress_recorder = ProgressRecorder(self)
+    print('launch_processing: start!')
+    # collage instance
     collage = Collage.objects.get(id=collage_id)
-    photo_urls = collage.get_photos_urls()
 
+    # get photo urls by flickr api
+    photo_urls = collage.get_photos_urls()
+    # photo_urls = [8,8,8,8,8,8,8,8]
+    print('launch_processing: urls retrieved!')
     # download, store and return photos
     for i, url in enumerate(photo_urls):
         new_photo = collage.download_photos_by_url(url)
-        new_photo.save()
-        collage.photos.add(new_photo)
+        with transaction.atomic():
+            new_photo.save()
+            collage.photos.add(new_photo)
+            progress_recorder.set_progress(collage.photos.count(), collage.photo_number)
 
-    # collage.get_cv2_images()
-    collage.generate_collage()
+    progress_recorder.set_progress(collage.photo_number, collage.photo_number)
+
     return "Collage created. Id = {}, " \
            "Date = {}".format(collage.id,
                               collage.create_date.strftime("%d %b %Y %H:%M:%S"))

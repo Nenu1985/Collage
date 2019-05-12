@@ -3,13 +3,12 @@ import os
 from celery import Celery
 
 ####
-# solved problem:
+# solved proble####m:
 # https://stackoverflow.com/questions/45744992/celery-raises-valueerror-not-enough-values-to-unpack
 # add a string to this file: 'os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 # AND start:
 # --->'celery -A Collag worker -l info -E'
 #
-####
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Collag.settings')

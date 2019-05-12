@@ -16,6 +16,7 @@
                     type: $(this).attr('method'), // GET or POST
                     url: $(this).attr('action'), // the file to call
                     success: function (data_celery_url) { // on success..
+                        {#if (data_celery_url != 0)#}
                         CeleryProgressBar.initProgressBar(data_celery_url)
                         // $("#some_text")[0].textContent += '&'
                         // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
@@ -89,8 +90,8 @@
 
         $('#submit').click(function () {
              $("#photo")[0].src = ""
-            $("#spinner").css("-webkit-animation-play-state", "running");
-             $("#spinner").show();
+            {#$("#spinner").css("-webkit-animation-play-state", "running");#}
+            {# $("#spinner").show();#}
              $('#progress-bar-message')[0].innerHTML = "Waiting...!"
             setTimeout(myPeriodicMethod, 200);
             //$("#some_text")[0].textContent += 'xx'

@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from .processor import Processor
 from .tasks import launch_processing, test_long_task, test_long_task2, my_task, my_task2, my_task3
+from Collag.celery import app
 
 
 # Create your views here.
@@ -84,9 +85,18 @@ def collage_input(request):
                 collage.user = request.user
                 collage.save()
 
-                res = launch_processing.delay(collage.pk)
+                celery_status = get_celery_worker_status()
 
+                if celery_status.get('ERROR', None):
+                    return HttpResponse(celery_status.get('ERROR'))
+                else:
+                    print('Celery is OK!')
+
+                # res = launch_processing.delay(collage.pk)
+                res = my_task.delay(10);
+                # launch_processing(collage.pk)
                 response = reverse('celery_progress:task_status', kwargs={'task_id': res.task_id})
+                # response = reverse('celery_progress:task_status', kwargs={'task_id': 0})
                 return HttpResponse(response)
 
             elif query_type == 'progress_launch':
@@ -100,6 +110,26 @@ def collage_input(request):
     else:
         return HttpResponse(status=405)
 
+def get_celery_worker_status():
+
+    ERROR_KEY = "ERROR"
+    try:
+        insp = app.control.inspect()
+
+        d = insp.stats()
+        if not d:
+            d = { ERROR_KEY: 'No running Celery workers were found.' }
+    except IOError as e:
+        from errno import errorcode
+        msg = "Error connecting to the backend: " + str(e)
+        if len(e.args) > 0 and errorcode.get(e.args[0]) == 'ECONNREFUSED':
+            msg += ' Check that the RabbitMQ server is running.'
+        d = { ERROR_KEY: msg }
+    except ImportError as e:
+        d = { ERROR_KEY: str(e)}
+    except Exception as e:
+        d = { ERROR_KEY: str(e)}
+    return d
 
 @login_required
 def collage_create(request):

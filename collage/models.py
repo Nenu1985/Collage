@@ -128,7 +128,7 @@ class Collage(models.Model):
                 if collage_inst and collage_inst.photo_size == self.photo_size:
                     return Photo.objects.filter(photo_url=photo_url).first()
         except Exception as e:
-            ptint('download_photos_by_url' + e)
+            print('download_photos_by_url' + e)
         finally:
 
             with TemporaryFile() as tf:

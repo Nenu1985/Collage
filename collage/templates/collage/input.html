@@ -76,9 +76,7 @@
        <div class="spinner-border" role="status" id="spinner">
             <span class="sr-only">Loading...</span>
         </div>
-
-<div id="div-photo" align="center">
-    <span id="collage"></span><br>
+<div id="div-photo">
     <img id="photo" src="">
 </div>
     {#----------------JAVASCRIPT---------------------------------------#}
@@ -92,7 +90,7 @@
         $('#submit').click(function () {
              $("#photo")[0].src = ""
             $("#spinner").css("-webkit-animation-play-state", "running");
-             // $("#spinner").show();
+             $("#spinner").show();
              $('#progress-bar-message')[0].innerHTML = "Waiting...!"
             setTimeout(myPeriodicMethod, 200);
             //$("#some_text")[0].textContent += 'xx'
@@ -110,9 +108,8 @@
                     query_type: 'poll'
                 },
                 success: function (data) {
-                    $("#photo")[0].src = data;
-                    $("#collage")[0].innerHTML = '<b>Коллаж:</b>';
 
+                    $("#photo")[0].src = data
                     //alert('Now and then')
                 },
                 complete: function () {

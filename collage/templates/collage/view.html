@@ -9,26 +9,22 @@
 <br>
 <hr>
 <div align="center">
-<h2> Коллаж:</h2>
+    <h2> Коллаж:</h2>
 
-<img src=" {{ collage.final_img.url }}">
+    <img src=" {{ collage.final_img.url }}">
 </div>
 <hr>
-
-{{  collage }}
+    <h3> Инфо: {{  collage }} </h3>
 <hr>
+
 <h2 align="center"> Исходные изображения </h2>
+
 {% for photo in collage.photos.all %}
-<img src="{{ photo.img_field.url }}">
-
-
-
-
+    <img src="{{ photo.img_field.url }}">
 {% endfor %}
 
 <br>
 <hr>
-
 
 
 <br>

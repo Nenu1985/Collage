@@ -92,8 +92,8 @@ def collage_input(request):
                 else:
                     print('Celery is OK!')
 
-                # res = launch_processing.delay(collage.pk)
-                res = my_task.delay(10);
+                res = launch_processing.delay(collage.pk)
+                # res = my_task.delay(10);
                 # launch_processing(collage.pk)
                 response = reverse('celery_progress:task_status', kwargs={'task_id': res.task_id})
                 # response = reverse('celery_progress:task_status', kwargs={'task_id': 0})

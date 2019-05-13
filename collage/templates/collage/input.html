@@ -1,106 +1,107 @@
 {% extends 'collage/base.html' %}
 
 
-
 {% block content %}
-    {% load static %}
-    <script type="text/javascript" src="{% static  'collage/jquery-3.4.0.js' %}"></script>
-    <script src="{% static 'celery_pb/celery_progress.js' %}"></script>
-    <script>
+{% load static %}
+<script type="text/javascript" src="{% static  'collage/jquery-3.4.0.js' %}"></script>
+<script src="{% static 'celery_pb/celery_progress.js' %}"></script>
+<script>
 
-        $(document).ready(function () {
-            $('#collage_form').submit(function () { // catch the form's submit event
-                $.ajax({ // create an AJAX call...
-                    data: $(this).serialize() +
-                        "&query_type=" + "collage_launch", // get the form data
-                    type: $(this).attr('method'), // GET or POST
-                    url: $(this).attr('action'), // the file to call
-                    success: function (data_celery_url) { // on success..
-                        CeleryProgressBar.initProgressBar(data_celery_url)
-                        // $("#some_text")[0].textContent += '&'
-                        // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
-                    }
-                });
-                return false;
+    $(document).ready(function () {
+        $('#collage_form').submit(function () { // catch the form's submit event
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize() +
+                    "&query_type=" + "collage_launch", // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function (data_celery_url) { // on success..
+                    CeleryProgressBar.initProgressBar(data_celery_url)
+                    // $("#some_text")[0].textContent += '&'
+                    // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
+                }
+            });
+            return false;
+        });
+
+
+        $('#button_progress_launch').click(function () {
+            //{#alert('alert!')#}
+            $.ajax({
+                type: "POST",
+                url: "{% url 'collage:input' %}",
+                data: {
+                    csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                    query_type: 'progress_launch'
+                },
+
+                success: function (data_celery_url) {
+                    var progressUrl = data_celery_url;
+                    CeleryProgressBar.initProgressBar(progressUrl)
+                },
             });
 
-
-            $('#button_progress_launch').click(function () {
-                //{#alert('alert!')#}
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'collage:input' %}",
-                    data: {
-                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-                        query_type: 'progress_launch'
-                    },
-
-                    success: function (data_celery_url) {
-                        var progressUrl = data_celery_url;
-                        CeleryProgressBar.initProgressBar(progressUrl)
-                    },
-                });
-
-            })
         })
-    </script>
+    })
+</script>
 
+{% csrf_token %}
+
+<!---------------------- PAGE CONTENT! ---------------------------->
+
+<form id="collage_form" action="{% url 'collage:input' %}" method="post">
     {% csrf_token %}
-
-    <!---------------------- PAGE CONTENT! ---------------------------->
-
-    <form id="collage_form" action="{% url 'collage:input' %}" method="post">
-        {% csrf_token %}
-        <table>
+    <table>
         {{ collage_input.as_table }}
-            </table>
+    </table>
+    <br>
+    <input id="submit" type="submit" value="OK">
+    <div id="DIV_CONTAINING_FORM">
         <br>
-        <input id="submit" type="submit" value="OK">
-       <div id="DIV_CONTAINING_FORM">
-            <br>
-        </div>
-    </form>
-
-    <div id="some_text">
-        {% if  some_text %}
-            {{ some_text }}
-        {% else %}
-
-        {% endif %}
-
     </div>
-    <div class='progress-wrapper'>
-        <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
-    </div>
-    <div id="progress-bar-message">Waiting for progress to start...</div>
-       <div class="spinner-border" role="status" id="spinner">
-            <span class="sr-only">Loading...</span>
-        </div>
-<div id="div-photo">
+</form>
+
+<div id="some_text">
+    {% if some_text %}
+    {{ some_text }}
+    {% else %}
+
+    {% endif %}
+
+</div>
+<div class='progress-wrapper'>
+    <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+</div>
+<div id="progress-bar-message">Waiting for progress to start...</div>
+<div class="spinner-border" role="status" id="spinner">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<div id="div-photo" align="center">
+    <span id="collage"></span><br>
     <img id="photo" src="">
 </div>
-    {#----------------JAVASCRIPT---------------------------------------#}
-    <script>
+{#----------------JAVASCRIPT---------------------------------------#}
+<script>
 
-        $(document).ready(function () {
+    $(document).ready(function () {
+        $("#spinner").css("-webkit-animation-play-state", "paused");
+        $("#spinner").hide();
+    })
+
+    $('#submit').click(function () {
+        $("#photo")[0].src = ""
+        $("#spinner").css("-webkit-animation-play-state", "running");
+        // $("#spinner").show();
+        $('#progress-bar-message')[0].innerHTML = "Waiting...!"
+        setTimeout(myPeriodicMethod, 200);
+        //$("#some_text")[0].textContent += 'xx'
+    })
+
+    function myPeriodicMethod() {
+        if ($('#progress-bar-message')[0].innerHTML === "Success!") {
             $("#spinner").css("-webkit-animation-play-state", "paused");
-            $("#spinner").hide();
-        })
 
-        $('#submit').click(function () {
-             $("#photo")[0].src = ""
-            $("#spinner").css("-webkit-animation-play-state", "running");
-             $("#spinner").show();
-             $('#progress-bar-message')[0].innerHTML = "Waiting...!"
-            setTimeout(myPeriodicMethod, 200);
-            //$("#some_text")[0].textContent += 'xx'
-        })
-
-        function myPeriodicMethod() {
-            if ($('#progress-bar-message')[0].innerHTML === "Success!"){
-                $("#spinner").css("-webkit-animation-play-state", "paused");
-
-                $.ajax({
+            $.ajax({
                 type: "POST",
                 url: "{% url 'collage:input' %}",
                 data: {
@@ -108,8 +109,9 @@
                     query_type: 'poll'
                 },
                 success: function (data) {
+                    $("#photo")[0].src = data;
+                    $("#collage")[0].innerHTML = '<b>Коллаж:</b>';
 
-                    $("#photo")[0].src = data
                     //alert('Now and then')
                 },
                 complete: function () {
@@ -118,14 +120,13 @@
                 }
             });
 
-            }
-            else {
-                setTimeout(myPeriodicMethod, 200);
-            }
+        } else {
+            setTimeout(myPeriodicMethod, 200);
         }
+    }
 
 
-    </script>
+</script>
 
 
 {% endblock %}

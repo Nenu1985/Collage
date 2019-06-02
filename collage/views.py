@@ -9,7 +9,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 import threading
 
 from django.views.decorators.csrf import csrf_protect
-from .processor import Processor
+
 from Collag.celery import app
 
 

@@ -14,7 +14,7 @@ import cv2
 import os
 import numpy as np
 import uuid
-from auth_app.models import CustomUser
+
 from django.db import transaction
 
 class PhotoSize(models.Model):

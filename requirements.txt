@@ -2,6 +2,7 @@ django>=2.2
 flickrapi>=2.4.0
 requests
 opencv-python==4.1.0.25
-
+gunicorn
+django-heroku
 Pillow==6.0.0
 

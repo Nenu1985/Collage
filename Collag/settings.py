@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'collage',
-    'auth_app',
-    'publish',
-    'celery_pb',
+
+
+
 ]
 
 MIDDLEWARE = [
@@ -111,11 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/es/2.0/topics/auth/
 
 # ГОВОРИМ джанге, какую модель использовать для авторизации:
-AUTH_USER_MODEL = 'auth_app.CustomUser'
+
 #урл для авторизации
-LOGIN_URL = '/auth/login'
+
 #куда редиректим после авторизации
-LOGIN_REDIRECT_URL = '/collage/index'
+
 
 # Говорим как производится авторизациия
 AUTHENTICATION_BACKENDS = [

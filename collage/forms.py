@@ -10,6 +10,8 @@ from collage.models import Collage
 #     class Meta:
 #         model = Photo
 
+class InputUrlFrom(forms.Form):
+    url_to_img = forms.CharField(label='Photo url', max_length=256);
 
 # class CollageInputForm(forms.Form):
 #     photo_num = forms.IntegerField()
@@ -19,25 +21,7 @@ from collage.models import Collage
 #     photo_size = forms.ModelChoiceField(queryset=sizes, empty_label=sizes.first(), to_field_name='size')
 #     #photo_size = forms.IntegerField()
 
-class CollageInputForm(forms.ModelForm):
-    class Meta:
-        model = Collage
-        exclude = [
-            'final_img',
-            'photos',
-            'create_date',
-            'user',
-        ]
-    def save(self, commit=True):
 
-        # создаем модель Collage
-        inst = super().save(commit=False)
-        inst.create_date = timezone.now()
-
-        if commit:
-            inst.save()
-        return inst
-#
 # class CollageCreateForm(forms.ModelForm):
 #     class Meta:
 #         model = Collage

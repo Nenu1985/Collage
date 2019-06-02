@@ -28,5 +28,3 @@ from .models import PhotoSize, Collage
 #         #'create_date',
 #
 #     ]
-admin.site.register(Collage)
-admin.site.register(PhotoSize)

@@ -1,10 +1,7 @@
 django>=2.2
 flickrapi>=2.4.0
-requests==2.21.0
-flickrapi==2.4.0
+requests
 opencv-python==4.1.0.25
-django-debug-toolbar==1.11
+
 Pillow==6.0.0
-celery>=4.3.0
-redis>=3.2.1
-eventlet>=0.24.1
+

@@ -27,8 +27,41 @@ class PhotoSize(models.Model):
 class Photo(models.Model):
     photo_url = models.URLField(default='tutorial:index')
     img_field = models.ImageField(upload_to='upload_collage_photos', unique=True)
-    valid = models.BooleanField(default=True)
     date = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def download_photos_by_url(photo_url):
+        """
+        Download a photo by url, save it to DB in photo model, return Photo instance
+        :param photo_url: url photo(img) to download
+        :return: photo model instance
+        """
+        # file_name = f'collage\photo\\src{str(num)}.jpg'
+        try:
+            check_photo_exists = Photo.objects.filter(photo_url=photo_url).first()
+            if check_photo_exists:
+                return Photo.objects.filter(photo_url=photo_url).first()
+            else:
+                with TemporaryFile() as tf:
+                    r = requests.get(photo_url, stream=True)
+                    for chunk in r.iter_content(chunk_size=4096):
+                        tf.write(chunk)
+
+                    tf.seek(0)
+                    with transaction.atomic():
+                        photo = Photo()
+                        photo.photo_url = photo_url
+                        photo.date = timezone.now()
+                        photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
+
+                return photo
+        except Exception as e:
+            print('download_photos_by_url' + e)
+            return None
+
+
+
+
 
 
 class CutPhoto(models.Model):
@@ -37,53 +70,70 @@ class CutPhoto(models.Model):
     img_field = models.ImageField(upload_to='cut_collage_photos', unique=True)
     date = models.DateTimeField(auto_now_add=True)
 
+    def face_detect(self, photo_src):
+        exists = CutPhoto.objects.filter(photo_src=photo_src).first()
 
-# Create your models here.
-class Collage(models.Model):
+        if exists:
+            return exists
 
-    photo_number = models.IntegerField(default=10)
-    cols_number = models.IntegerField(default=5)
-    create_date = models.DateTimeField(auto_now_add=True)
-    photo_tag = models.CharField(max_length=30, default='women')
-    photo_size = models.ForeignKey(PhotoSize, on_delete=models.CASCADE, blank=True)
-    #photo_size = models.IntegerField()
-    photos = models.ManyToManyField(Photo, blank=True)
+        src_img = cv2.imread(photo_src.img_field.path)
 
-    final_img = models.ImageField(upload_to='collages', blank=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+        frame_height = src_img.shape[0]
+        frame_width = src_img.shape[1]
+        iw = 400
+        # adjust src_img shape to shape that not less than required size
+        # newimg = cv2.resize(oriimg, (int(newX), int(newY)))
+        if frame_height < iw:  # height
+            scale_coef = iw / frame_height
+            src_img = cv2.resize(src_img, (int(src_img.shape[1] * scale_coef), iw))
 
-    def __str__(self):
-        return 'Collage N = {0}; ' \
-               'Size = {1}; ' \
-               'Cols num = {2}; ' \
-               'Size = {3}---'\
-               'Date = {4}'\
-                .format(self.photo_number,
-                        self.photo_size,
-                        self.cols_number,
-                        self.photo_size.size,
-                        self.create_date.strftime("%d %b %Y %H:%M:%S"),
-                        )
+        elif frame_width < iw:  # width
+            scale_coef = iw / frame_width
+            src_img = cv2.resize(src_img, (iw, int(src_img.shape[0] * scale_coef)))
 
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=3) <= self.create_date <= now
+        processing_img = src_img.copy()
+        frame_height = src_img.shape[0]
+        frame_width = src_img.shape[1]
 
-    # наводим красоту для метода при отображении списка вопросов в админке
-    was_published_recently.admin_order_field = 'pub_date'
-    was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'
+        # resize source image for better processing
+        in_height = 300  # initial image height for good face detect
+        in_width = int((frame_width / frame_height) * in_height)
+        processing_img = cv2.resize(processing_img, (in_width, in_height))
 
-    # def launch_processing(self):
-    #     photo_urls = self.get_photos_urls()
-    #
-    #     # download, store and return photos
-    #     for i, url in enumerate(photo_urls):
-    #         new_photo = self.download_photos_by_url(url)
-    #         new_photo.save()
-    #         self.photos.add(new_photo)
-    #
-    #
+        # get classifier
+        # face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")  # Win style
+        face_cascade = cv2.CascadeClassifier("./collage/haar/haarcascade_frontalface_default.xml")  # Ubuntu style
+        # face detector
+        gray = cv2.cvtColor(processing_img, cv2.COLOR_BGR2GRAY)
+
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=3)
+        for (x, y, w, h) in faces:
+            processing_img = cv2.rectangle(processing_img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+        if not list(faces):
+            # draw a red cross:
+            cv2.line(processing_img, (5, 5), (15, 15), (0, 0, 255), thickness=2)
+            cv2.line(processing_img, (15, 5), (5, 15), (0, 0, 255), thickness=2)
+        else:
+            cv2.line(processing_img, (5, 5), (7, 14), (0, 255, 0), thickness=2)
+            cv2.line(processing_img, (7, 14), (14, 5), (0, 255, 0), thickness=2)
+        # roi = Collage.get_roi(int(frame_width / 2), int(frame_height / 2), frame_width, frame_height, iw_h)
+        # face_cascade = cv2.CascadeClassifier("collage\\haar\\haarcascade_frontalface_default.xml")
+        # out_small_image = src_img[roi[1] - iw_h:roi[1] + iw_h - 1,
+        #                   roi[0] - iw_h:roi[0] + iw_h - 1].copy()
+
+        cut_photo = CutPhoto()
+        cut_photo.photo_src = photo_src
+
+        Collage.save_mat_to_image_field(processing_img, cut_photo.img_field)
+        cut_photo.save()
+
+        return cut_photo
+
+
+
+class Collage:
+
     def get_photos_urls(self):
         flickr = flickrapi.FlickrAPI(
             settings.GLOBAL_SETTINGS['FLICKR_PUBLIC'],
@@ -144,15 +194,7 @@ class Collage(models.Model):
                     photo.img_field.save(basename(urlsplit(photo_url).path), File(tf))
 
             return photo
-    #
-    def get_cv2_images(self):
-        photos_to_cut = self.photos.all();
 
-        images = []
-        for photo in photos_to_cut:
-            Collage.resize_img(self, photo)
-
-        return images
 
     @classmethod
     def get_roi(cls, x_c: int, y_c: int, i_w: int, i_h: int, iw_h: int):
@@ -268,7 +310,8 @@ class Collage(models.Model):
     @classmethod
     def save_mat_to_image_field(cls, image, img_field):
 
-        file_path = settings.MEDIA_ROOT + '\\_temp.jpg'
+        file_path = settings.MEDIA_ROOT + '\\_temp.jpg'  # Win style
+        file_path = settings.MEDIA_ROOT + '/_temp.jpg'  # Ubuntu style
         cv2.imwrite(file_path, image)
 
         with open(file_path, 'rb') as photo_file:

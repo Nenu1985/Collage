@@ -10,7 +10,7 @@ import threading
 
 from django.views.decorators.csrf import csrf_protect
 
-from Collag.celery import app
+# from Collag.celery import app
 
 
 

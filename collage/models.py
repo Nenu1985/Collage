@@ -3,7 +3,7 @@ from django.utils import timezone
 import urllib
 import requests
 import datetime
-import flickrapi
+# import flickrapi
 from django.conf import settings
 from django.core.cache import cache
 from tempfile import TemporaryFile

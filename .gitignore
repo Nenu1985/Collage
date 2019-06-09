@@ -1,1 +1,6 @@
 .idea/
+venv/
+collage/__pycache__/
+Collag/__pycache__/
+auth_app/__pycache__/
+db.sqlite

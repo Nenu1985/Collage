@@ -1,8 +1,6 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase, Client, RequestFactory
-from collage.models import Collage, PhotoSize
 from django.db.utils import IntegrityError
-from collage.forms import CollageInputForm
 from django.urls import reverse
 import flickrapi
 from django.conf import settings
@@ -10,13 +8,19 @@ import requests
 from os.path import basename
 from tempfile import TemporaryFile
 from django.db import transaction
-from .models import Photo
 from django.utils import timezone
 from urllib.parse import urlsplit
 from django.core.files import File
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from .views import index
+from .models import Photo
+from collage.forms import CollageInputForm
+from collage.models import Collage, PhotoSize
+from Collag.celery import app as celery_app
+from redis.exceptions import ConnectionError as RedisConnectionError
+
+
 # >>> from django.test.utils import setup_test_environment
 # >>> setup_test_environment()
 # Create your tests here.
@@ -130,6 +134,24 @@ class FlickrTest(TestCase):
         self.assertTrue(photo.img_field.url, 'Photo object doesn\'t have a photo url')
 
         self.assertEqual(photo.photo_url, retrieved_url)
+
+
+class CeleryTest(TestCase):
+    def test_redis_connection(self):
+
+        redis_connection("default").flushall()
+
+
+    # def test_celery_worker(self):
+    #
+    #     insp = celery_app.control.inspect()
+    #     try:
+    #         stats = insp.stats()
+    #         self.assertIsNone(stats.get('ERROR', None))
+    #
+    #     except RedisConnectionError as e:
+    #         self.assertTrue(False, 'Redis is off' + e)
+
 
 
 def collage_creation():

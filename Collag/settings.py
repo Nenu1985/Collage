@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'auth_app',
     'publish',
     'celery_pb',
+    'djcelery',
+
 ]
 
 MIDDLEWARE = [

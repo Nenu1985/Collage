@@ -15,8 +15,8 @@
                 type: $(this).attr('method'), // GET or POST
                 url: $(this).attr('action'), // the file to call
                 success: function (data_celery_url) { // on success..
-                    CeleryProgressBar.initProgressBar(data_celery_url)
-                    // $("#some_text")[0].textContent += '&'
+                    //CeleryProgressBar.initProgressBar(data_celery_url)
+                     $("#some_text")[0].textContent += '&'
                     // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
                 }
             });
@@ -48,7 +48,7 @@
 
 <!---------------------- PAGE CONTENT! ---------------------------->
 
-<form id="collage_form" action="{% url 'collage:input' %}" method="post">
+<form id="collage_form"  method="post">
     {% csrf_token %}
     <table>
         {{ collage_input.as_table }}

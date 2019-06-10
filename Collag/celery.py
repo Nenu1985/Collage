@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
 
+
 ####
 # solved proble####m:
 # https://stackoverflow.com/questions/45744992/celery-raises-valueerror-not-enough-values-to-unpack
@@ -9,10 +10,22 @@ from celery import Celery
 # AND start:
 # --->'celery -A Collag worker -l info -E'
 #
+# INSTALL REDIS:
+# sudo apt-get install redis-server  # - install
+# sudo systemctl enable redis-server.service  #  launch and on the boot
+# sudo systemctl restart redis-server.service  # restart
+
+# Test connection:
+# redis-cli
+#
+# 127.0.0.1:6379> ping
+# PONG
+
+
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Collag.settings')
-os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
+# os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
 
 app = Celery('Collag')
 

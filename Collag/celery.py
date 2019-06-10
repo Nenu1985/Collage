@@ -25,7 +25,7 @@ from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Collag.settings')
-# os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
+os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1') # only use on Windows!
 
 app = Celery('Collag')
 
@@ -34,10 +34,11 @@ app = Celery('Collag')
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
+# app.config_from_object('django.conf:settings')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
-#app.autodiscover_tasks(packages='Collag')
+# app.autodiscover_tasks(packages='Collag')
 
 
 @app.task(bind=True)

@@ -15,7 +15,7 @@
                 type: $(this).attr('method'), // GET or POST
                 url: $(this).attr('action'), // the file to call
                 success: function (data_celery_url) { // on success..
-                    //CeleryProgressBar.initProgressBar(data_celery_url)
+                    CeleryProgressBar.initProgressBar(data_celery_url)
                      $("#some_text")[0].textContent += '&'
                     // $('#DIV_CONTAINING_FORM').innerText(data_celery_url); // update the DIV
                 }

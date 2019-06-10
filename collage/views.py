@@ -88,6 +88,7 @@ def collage_input(request):
                 celery_status = get_celery_worker_status()
                 celery_status = {}
                 if celery_status.get('ERROR', None):
+                    print (celery_status.get('ERROR'))
                     return HttpResponse(celery_status.get('ERROR'))
                 else:
                     print('Celery is OK!')
